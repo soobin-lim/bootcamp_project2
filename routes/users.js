@@ -3,7 +3,9 @@ var router = express.Router();
 
 var passport = require("../config/passport");
 var users_controller = require("../controllers/users_controller");
-var isAuthenticated = require("../config/middleware/isAuthenticated");
+var isAuthenticated = require("../config/middleware/isAuthenticated");  
+
+// middle ware in users routes isAuthenticated, to check if ..
 
 router.get("/signup", users_controller.registrationPage);
 
@@ -13,6 +15,12 @@ router.post(
   "/login",
   passport.authenticate("local-login"),
   users_controller.loginUser
+);
+
+router.post(
+  "/anonymous",
+  // passport.authenticate("local-login-anonymous"), <- 400 bad request
+  users_controller.loginAnonymous
 );
 
 router.post(

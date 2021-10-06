@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const db = require("../models");
 
-// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
+
 passport.use(
   "local-login",
   new LocalStrategy(
@@ -32,6 +32,24 @@ passport.use(
         }
         // If none of the above, return the user
         return done(null, dbUser);
+      });
+    }
+  )
+);
+
+// Telling passport we want to use a Local Strategy. In other words, we want login with a anonymous mode 
+//(not using any of those(username/email and password))
+passport.use(
+  "local-login-anonymous",
+  new LocalStrategy(
+    // Our user will sign in using a username
+    {
+      usernameField: "username",
+    },
+    (username, password, done) => {
+      return done(null, {
+        username: username, // 'anonymous'
+        password: password  // 'Anonymous1!'
       });
     }
   )

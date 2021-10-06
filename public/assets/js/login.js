@@ -13,7 +13,7 @@ $(document).ready(() => {
     .then(data => window.location.replace(data))
     .catch(err => $("#password-feedback").text("Incorrect Username or Password"));
   }
-
+  
   // When the form is submitted, we validate there's an email and password entered
   loginForm.on("submit", event => {
     event.preventDefault();
@@ -40,5 +40,17 @@ $(document).ready(() => {
     usernameInput.val("");
     passwordInput.val("");
   });
+
+  $("#Anonymous").click(AnonymousHandler);
+
+  function AnonymousHandler(){
+    console.log('public/js/login - anonymous handler ');
+    $.post("/users/anonymous", {
+      // username: username,
+      // password: password
+    })
+    .then(data => window.location.replace(data))
+    .catch(err => $("#password-feedback").text("Anonymous login failed"));
+  }
 
 });
