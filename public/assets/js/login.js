@@ -1,5 +1,3 @@
-const signinAnonymously = require('./firebase');
-
 $(document).ready(() => {
   // Getting references to our form and inputs
   const loginForm = $("form.login");
@@ -41,10 +39,6 @@ $(document).ready(() => {
     loginUser(userData.username, userData.password);
     usernameInput.val("");
     passwordInput.val("");
-  });
-
-  loginForm.on("submit-anonymous", event => {
-    signinAnonymously();
   });
 
 });

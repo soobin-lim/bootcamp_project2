@@ -9,6 +9,7 @@ const passport = require("./config/passport");
 const config = require("./config/extra-config");
 const compression = require("compression");
 const { sequelize } = require("./models");
+
 // Express settings
 // ================
 
@@ -61,6 +62,7 @@ app.use(authCheck);
 app.use(compression());
 
 require("./routes")(app);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

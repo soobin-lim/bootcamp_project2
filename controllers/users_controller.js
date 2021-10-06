@@ -1,4 +1,5 @@
 const db = require("../models");
+const create_user = require('./firebase_auth/create_user');
 
 //this is the users_controller.js file
 exports.registrationPage = (req, res) => {
@@ -22,5 +23,7 @@ exports.loginUser = (req, res) => {
 
 // register a user
 exports.signUpUser = (req, res) => {
+  console.log('users_controller_signUpUserfunction', req.body);
+  create_user();
   res.json({ redirect: "/" });
 };
