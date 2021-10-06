@@ -5,7 +5,7 @@
 		<div class="loginmodal-container">
 			<h1 class="">Log In to Your Account</h1><br>
 		  <form class="login">
-		  	<div id="username-form" class="form-group col-lg-12">
+		  	{{!-- <div id="username-form" class="form-group col-lg-12">
 					<label>Username</label>
 					<input id="username-input" type="text" name="user" placeholder="Username">
 					<small id="username-feedback" class=""></small>
@@ -15,9 +15,19 @@
 					<input id="password-input" type="password" name="pass" placeholder="Password">
 					<small id="password-feedback" class=""></small>
 				</div>
-				<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-		  </form>
-		  <div class="login-help">
+				 --}}
+				<!-- Submit -->
+				<input id ="email_login" type="submit" name="login" class="login loginmodal-submit" value="Login_Email"> <!-- LOGIN BUTTON -->
+
+				<!-- Submit Firebase -->
+				<input id ="anonymously_login" type="submit" name="login_firebase" class="login loginmodal-submit-firebase" value="Login_Anonymous"> <!-- LOGIN BUTTON -->
+
+				<!-- Submit Firebase -->
+				<input id ="gmail_login" type="submit" name="login_firebase" class="login loginmodal-submit-firebase" value="Login_Gmail"> <!-- LOGIN BUTTON -->
+		  
+			</form>
+			<!-- Footer -->
+		  <div class="login-help">	
 				<a href="/users/signup">Register</a> - <a href="#">Forgot Password</a>
 		  </div>
 		</div>
