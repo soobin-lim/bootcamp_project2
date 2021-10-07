@@ -84,6 +84,7 @@ app.use((err, req, res, next) => {
 });
 
 //res.locals
+app.locals.uid = 'undefined';
 
 // our module get's exported as app.
 module.exports = app;

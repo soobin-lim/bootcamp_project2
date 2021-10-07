@@ -1,7 +1,3 @@
-
-
-// const token = await firebase.auth.currentUser.getIdToken();
-
 $(document).ready(() => {
   // Getting references to our form and inputs
   const loginForm = $("form.login");
@@ -38,7 +34,6 @@ $(document).ready(() => {
       return;
     }
 
-
     // If we have an email and password we run the loginUser function and clear the form
     loginUser(userData.username, userData.password);
     usernameInput.val("");
@@ -54,7 +49,8 @@ $(document).ready(() => {
     })
     .then((data) => { 
       // console.log('public/js/login - anonymousHandler.post.then(data) : ', data);
-      window.location.replace(data)
+      
+      window.location.replace('/')
     })
     .catch(err => $("#password-feedback").text("Anonymous login failed"));
   }
