@@ -1,4 +1,5 @@
 
+
 // const token = await firebase.auth.currentUser.getIdToken();
 
 $(document).ready(() => {
@@ -48,9 +49,8 @@ $(document).ready(() => {
 
   function AnonymousHandler(){
     console.log('public/js/login - anonymous handler ');
-    $.post("/users/anonymous", {
-      // username: username,
-      // password: password
+    $.get("/users/anonymous", function(data){
+      alert(data);
     })
     .then((data) => { 
       // console.log('public/js/login - anonymousHandler.post.then(data) : ', data);

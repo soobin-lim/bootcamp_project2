@@ -17,7 +17,7 @@ router.post(
   users_controller.loginUser
 );
 
-router.post(
+router.get(
   "/anonymous",
   // passport.authenticate("local-login-anonymous"), <- 400 bad request
   users_controller.loginAnonymous

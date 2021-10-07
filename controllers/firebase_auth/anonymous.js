@@ -22,6 +22,7 @@ module.exports = () => {
     })
     .catch((error) => {
       console.log('Error creating new user:', error);
+      return error;
     });
 };
 

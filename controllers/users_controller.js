@@ -30,7 +30,8 @@ exports.loginAnonymous = async (req, res) => {
   uid = await create_anonymous_user();
   console.log(uid);
   res.locals.uid = uid;
-  res.json("/");
+  // res.json("/");
+  res.json(uid);
 };
 
 // register a user
