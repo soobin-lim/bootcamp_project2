@@ -6,7 +6,7 @@
                 Menu <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="/">
-                <span class="light"><img class="shield-icon" src="/assets/img/shield.png">TravelSafe</span>
+                <span class="light"><img class="shield-icon" src="/assets/img/logo.png">Production Report</span>
             </a>
         </div>
 
@@ -31,14 +31,17 @@
                 </li>
 
                 <li>
-                    <a class="page-scroll" href="/time control/">Time Control</a>
+                    <a class="page-scroll" href="/timecontrol/">Time Control</a>
                 </li>
-                {{#if isAuthenticated}}
+                {{#if isAuthenticated}}         <!-- how isAuthenticated is called ?-->
                     <li>
                         <a class="page-scroll" href="/trips/">My Trips</a>
                     </li>
                     <li>
                         <a href="/users/sign-out" class="page-scroll" data-toggle="modal">Logout</a>
+                    </li>
+                    <li>
+                        <div class="page-scroll" >{{uid}}</div>      <!-- <br>{{isAuthenticatedfb}}-->
                     </li>
                 {{else}}
                     <li>

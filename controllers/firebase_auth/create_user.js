@@ -3,11 +3,14 @@ module.exports = (user) => {
 
   var admin = require('firebase-admin');
   var serviceAccount = require("../../key.json");
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://bootcampproject2-1abd5.firebaseio.com',
-    projectId: "bootcampproject2-1abd5",
-  });
+  if (!admin.apps.length) {
+
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: 'https://bootcampproject2-1abd5.firebaseio.com',
+      projectId: "bootcampproject2-1abd5",
+    });
+  };
 
   admin
     .auth()

@@ -39,8 +39,8 @@ passport.use(
 
 // Telling passport we want to use a Local Strategy. In other words, we want login with a anonymous mode 
 //(not using any of those(username/email and password))
-passport.use(
-  "local-login-anonymous",
+passport.use(   // not used..
+  "local-login-anonymous",      // it occurs 404 bad request error
   new LocalStrategy(
     // Our user will sign in using a username
     {

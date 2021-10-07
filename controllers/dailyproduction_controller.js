@@ -1,1 +1,1 @@
-exports.index = (req, res) => res.render('pricing/pricing');
+exports.index = (req, res) => res.render('report/dailyproduction');

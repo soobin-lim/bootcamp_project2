@@ -30,19 +30,21 @@ app.use(
 );
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views"));  // './views folder' is set to app.set("views")
 
 //set up handlebars
-const exphbs = require("express-handlebars");
+const exphbs = require("express-handlebars");     // node js has handlebars
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main",
+    defaultLayout: "main",                    // default Layout is "main" -> main.handlebars
   })
 );
-app.set("view engine", "handlebars");
+app.set("view engine", "handlebars");     // app.engine("handlebars") has set as a "view engine" in node express
 
-const isAuth = require("./config/middleware/isAuthenticated");
+const isAuth = require("./config/middleware/isAuthenticated");  // not used
+const isAuth2 = require("./config/middleware/isAuthenticatedfb");  // not used
+
 const authCheck = require("./config/middleware/attachAuthenticationStatus");
 
 // uncomment after placing your favicon in /public
@@ -55,11 +57,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({ secret: config.sessionKey, resave: true, saveUninitialized: true })
 );
-app.use(passport.initialize());
+app.use(passport.initialize());   // access to 
 app.use(passport.session());
-app.use(authCheck);
+app.use(authCheck);     // default path is omitted, authCheck function executes if user comes to localhost:3000
 
-app.use(compression());
+app.use(compression());    
 
 require("./routes")(app);
 
@@ -80,6 +82,8 @@ app.use((err, req, res, next) => {
     error: app.get("env") === "development" ? err : {},
   });
 });
+
+//res.locals
 
 // our module get's exported as app.
 module.exports = app;

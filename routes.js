@@ -1,3 +1,4 @@
+const checkIfAuthenticated = require('./config/middleware/checkIfAuthenticated');
 module.exports = app => {
 
 		const application = require('./routes/application');
@@ -14,7 +15,7 @@ module.exports = app => {
 		app.use('/trips', trips);
 		app.use('/pricing', pricing);
 		//add
-		app.use('/dailyproduction', dailyproduction);
+		app.use('/dailyproduction', checkIfAuthenticated,  dailyproduction);
 		app.use('/inventory', inventory);
 		app.use('/timecontrol', timecontrol);
     //other routes..

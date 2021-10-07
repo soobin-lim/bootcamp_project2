@@ -8,3 +8,5 @@ module.exports = (req, res, next) => {
   // If the user isnt' logged in, redirect them to the login page
   return res.redirect("/");
 };
+
+// 1. req.
