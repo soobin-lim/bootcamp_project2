@@ -5,10 +5,10 @@ const path = require("path");
 const logger = require("morgan");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const passport = require("./config/passport");
 const config = require("./config/extra-config");
 const compression = require("compression");
 const { sequelize } = require("./models");
+const passport = require("./config/passport");
 
 // Express settings
 // ================
@@ -59,6 +59,7 @@ app.use(
 );
 app.use(passport.initialize());   // access to 
 app.use(passport.session());
+
 app.use(authCheck);     // default path is omitted, authCheck function executes if user comes to localhost:3000
 
 app.use(compression());    

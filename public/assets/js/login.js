@@ -10,7 +10,10 @@ $(document).ready(() => {
       username: username,
       password: password
     })
-    .then(data => window.location.replace(data))
+    .then((data) => {
+      window.location.replace(data);
+      console.log('loginUser returned data and we redirect to : ', data);
+    })
     .catch(err => $("#password-feedback").text("Incorrect Username or Password"));
   }
   

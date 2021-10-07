@@ -7,8 +7,8 @@ const attachAuthenticationStatus = (req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated();   
   // 1. this passes isAuthenticated to all handlebars? Yes
 
-  // how isAuthenticated is working in here? without require? 
-  // coming from  passport.js?
+  // how isAuthenticated is working in here? without require? coming from  passport.js?
+  // res.loca
   
   res.locals.randomproperty = req.app.locals.uid;
   
