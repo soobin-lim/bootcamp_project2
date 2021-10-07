@@ -2,7 +2,7 @@ module.exports = () => {
   console.log('anonymous auth starting');
 
   var admin = require('firebase-admin');
-  var serviceAccount = require("../../key.json");
+  var serviceAccount = require("../../../key.json");
 
   if (!admin.apps.length) {
     admin.initializeApp({

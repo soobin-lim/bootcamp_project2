@@ -9,6 +9,7 @@ const config = require("./config/extra-config");
 const compression = require("compression");
 const { sequelize } = require("./models");
 const passport = require("./config/passport");
+global.__basedir = __dirname;
 
 // Express settings
 // ================
@@ -34,13 +35,15 @@ app.set("views", path.join(__dirname, "views"));  // './views folder' is set to 
 
 //set up handlebars
 const exphbs = require("express-handlebars");     // node js has handlebars
+
 app.engine(
   "handlebars",
   exphbs({
+    helpers: require('./helpers/handlebars').helpers, // helper function for handlebars
     defaultLayout: "main",                    // default Layout is "main" -> main.handlebars
   })
 );
-app.set("view engine", "handlebars");     // app.engine("handlebars") has set as a "view engine" in node express
+app.set("view engine", "handlebars");     // app.engine("handlebars") has set as a "view engine" in node express, with helpers
 
 const isAuth = require("./config/middleware/isAuthenticated");  // not used
 const isAuth2 = require("./config/middleware/isAuthenticatedfb");  // not used

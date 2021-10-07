@@ -1,6 +1,6 @@
-const db = require("../models");
-const create_user = require('./firebase_auth/create_user');
-const create_anonymous_user = require('./firebase_auth/anonymous');
+// const db = require("../models");
+const create_user = require('./controllers/firebase_auth/create_user');
+const create_anonymous_user = require('./controllers/firebase_auth/anonymous');
 //this is the users_controller.js file
 exports.registrationPage = (req, res) => {
   res.render("users/registration", {
