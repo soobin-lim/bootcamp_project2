@@ -1,6 +1,6 @@
 const uploadFile = require("../middleware/upload");
 const fs = require("fs");
-const baseUrl = "http://localhost:8080/files/";
+const baseUrl = "http://localhost:8080/files/";   // this path.. is just used to return file's url(to download, to show files exist)
 
 const upload = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ const upload = async (req, res) => {
 };
 
 const getListFiles = (req, res) => {
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = "http://localhost:3000/public/assets/uploads/";
 
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
@@ -40,20 +40,20 @@ const getListFiles = (req, res) => {
 
     let fileInfos = [];
 
-    files.forEach((file) => {
+    files.forEach((file) => {   // it might return wrong file infos.. (wrong baseUrl path)
       fileInfos.push({
         name: file,
         url: baseUrl + file,
       });
     });
-
+    console.log(fileInfos);
     res.status(200).send(fileInfos);
   });
 };
 
 const download = (req, res) => {
   const fileName = req.params.name;
-  const directoryPath = __basedir + "/resources/static/assets/uploads/";
+  const directoryPath = "http://localhost:3000/public/assets/uploads/"; //__basedir + "/public/assets/uploads/";
 
   res.download(directoryPath + fileName, fileName, (err) => {
     if (err) {

@@ -14,22 +14,24 @@ const { sequelize } = require("./models");
 const passport = require("./config/passport");
 const exphbs = require("express-handlebars");     // node js has handlebars
 const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 var corsOptions = {
   origin: "http://localhost:8081"
 };
-const initRoutes = require("./routes/controllers/api/fileuploader/routes/");
+const fileuploadRouter = require("./routes/controllers/api/fileuploader/routes/");
 
 
-const fileUpload = require("express-fileupload");
 // Express settingsƒ
 // ================
 
 // instantiate our app
 const app = express();
-initRoutes(app);
-app.use(cors(corsOptions));
+
 global.__basedir = __dirname;
+
+fileuploadRouter(app);
+app.use(cors(corsOptions));
 //allow sessions
 app.use(
   session({
@@ -90,6 +92,7 @@ app.use((err, req, res, next) => {
     error: app.get("env") === "development" ? err : {},
   });
 });
+
 
 //res.locals
 // app.locals.uid = 'undefined';

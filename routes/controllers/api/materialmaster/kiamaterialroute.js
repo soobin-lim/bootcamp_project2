@@ -1,3 +1,5 @@
+// sequelize findall findByPk
+
 const router = require('express').Router();
 // Import the model
 const KiaMaterial = require('../../../../models/materialmaster/KiaMaterial');    //need a test file

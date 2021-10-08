@@ -15,7 +15,6 @@ const db = require("../models");
 
 // we set the port of the app
 app.set("port", process.env.PORT || 3000);
-
 // In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
 
 // we sync the models with our db
