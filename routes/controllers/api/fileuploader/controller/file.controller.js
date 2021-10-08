@@ -1,6 +1,6 @@
 const uploadFile = require("../middleware/upload");
 const fs = require("fs");
-const baseUrl = "http://localhost:8080/files/";   // this path.. is just used to return file's url(to download, to show files exist)
+const baseUrl = "http://localhost:3000/files/";   // this path.. is just used to return file's url(to download, to show files exist)
 
 const upload = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ const upload = async (req, res) => {
 };
 
 const getListFiles = (req, res) => {
-  const directoryPath = "http://localhost:3000/public/assets/uploads/";
+  const directoryPath = __basedir + "/public/assets/uploads/";
 
   fs.readdir(directoryPath, function (err, files) {
     if (err) {
@@ -47,6 +47,10 @@ const getListFiles = (req, res) => {
       });
     });
     console.log(fileInfos);
+    if(!res){
+      console.log(res == undefined)
+      return fileInfos;
+    }
     res.status(200).send(fileInfos);
   });
 };
