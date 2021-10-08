@@ -1,8 +1,11 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../config/connection');
+// const { Model, DataTypes } = require('sequelize');
+// const sequelize = require('../../config/connection');
 
-class DailyProductionReport extends Model { }
-DailyProductionReport.init(
+// class DailyProductionReport extends Model { }
+module.exports = (sequelize, DataTypes) => {
+
+const DailyProductionReport = sequelize.define(
+  'DailyProductionReport',
   {
     material: {
       type: DataTypes.STRING,
@@ -44,12 +47,14 @@ DailyProductionReport.init(
       },
     },
   },
-  {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'sap_and_kia_material',
-  }
+  // {
+  //   sequelize,
+  //   freezeTableName: true,
+  //   underscored: true,
+  //   modelName: 'sap_and_kia_material',
+  // }
 );
-
 return DailyProductionReport;
+}
+
+// return DailyProductionReport;

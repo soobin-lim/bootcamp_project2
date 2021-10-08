@@ -1,3 +1,6 @@
+
+
+
 // Dependencies
 // ============
 const express = require("express");
@@ -11,6 +14,7 @@ const { sequelize } = require("./models");
 const passport = require("./config/passport");
 const exphbs = require("express-handlebars");     // node js has handlebars
 const cors = require("cors");
+
 var corsOptions = {
   origin: "http://localhost:8081"
 };
@@ -94,10 +98,3 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-  // set our app to listen to the port we set above
-  const server = app.listen(app.get("port"), () =>
-    debug("Express server listening on port " + server.address().port)
-  );
-});

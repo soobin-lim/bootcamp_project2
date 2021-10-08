@@ -1,9 +1,10 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../config/connection');
+// const { Model, DataTypes } = require('sequelize');
+// const sequelize = require('../../config/connection');
 
-class KiaMaterial extends Model { }
+// class KiaMaterial extends Model { }
 
-KiaMaterial.init(
+module.exports = (sequelize, DataTypes) => {
+  const KiaMaterial = sequelize.define('KiaMaterial',
   {
     material: {
       type: DataTypes.STRING,
@@ -24,16 +25,16 @@ KiaMaterial.init(
         len: [4]
       }
     },
-  },
-  {
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'kiamaterial',
-  }
-);
+  });
+  return KiaMaterial;
+}
+  // {
+  //   sequelize,
+  //   freezeTableName: true,
+  //   underscored: true,
+  //   modelName: 'kiamaterial',
+  // }
 
-module.exports = KiaMaterial;
 
 
 // Date: {

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const timeControl = sequelize.define('timeControl', {
+  const TimeControl = sequelize.define('TimeControl', {
     line: {
       type: DataTypes.STRING,
       allowNull: true
@@ -27,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  return timeControl;
+  return TimeControl;
 }

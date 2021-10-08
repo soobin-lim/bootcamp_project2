@@ -14,16 +14,17 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
+  // console.log('option2', config.database, config.username, config.password, config);
 }
 
-const model1 = require('./materialmaster/KiaMaterial');
-const model2 = require('./materialmaster/SapAndKiaMaterial');
+const model1 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
+const model2 = require('./materialmaster/SapAndKiaMaterial')(sequelize, Sequelize);
 
-const model3 = require('./production_report/DailyProductionReport');
-// const model4 = require('./materialmaster/KiaMaterial');
+const model3 = require('./production_report/DailyProductionReport')(sequelize, Sequelize);
+// const model4 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
-const model5 = require('./timecontrol/TimeControl');
-// const model6 = require('./materialmaster/KiaMaterial');
+const model5 = require('./timecontrol/TimeControl')(sequelize, Sequelize);
+// const model6 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
 db.KiaMaterial = model1;
 db.SapAndKiaMaterial = model2;
