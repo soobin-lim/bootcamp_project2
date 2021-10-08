@@ -18,7 +18,7 @@ const cors = require("cors");
 var corsOptions = {
   origin: "http://localhost:8081"
 };
-const initRoutes = require("./fileuploader/routes");
+const initRoutes = require("./routes/controllers/api/fileuploader/routes/");
 
 
 const fileUpload = require("express-fileupload");
@@ -52,7 +52,7 @@ var hbs = exphbs.create({
 app.engine(".handlebars", hbs.engine);
 app.set("view engine", ".handlebars");
 
-const authCheck = require("./config/middleware/attachAuthenticationStatus");
+const authCheck = require("./config/config_function/attachAuthenticationStatus");
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
