@@ -9,7 +9,6 @@ if (!admin.apps.length) {
   });
 }
 
-
 const checkIfAuthenticated = (req, res, next) => {
   const uid = req.app.locals.uid;
   req.app.locals.username='Anonymous';

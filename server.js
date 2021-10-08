@@ -9,14 +9,23 @@ const config = require("./config/extra-config");
 const compression = require("compression");
 const { sequelize } = require("./models");
 const passport = require("./config/passport");
-global.__basedir = __dirname;
+const exphbs = require("express-handlebars");     // node js has handlebars
+const cors = require("cors");
+var corsOptions = {
+  origin: "http://localhost:8081"
+};
+const initRoutes = require("./fileuploader/routes");
 
-// Express settings
+
+const fileUpload = require("express-fileupload");
+// Express settingsƒ
 // ================
 
 // instantiate our app
 const app = express();
-
+initRoutes(app);
+app.use(cors(corsOptions));
+global.__basedir = __dirname;
 //allow sessions
 app.use(
   session({
@@ -32,21 +41,12 @@ app.use(
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));  // './views folder' is set to app.set("views")
-
-//set up handlebars
-const exphbs = require("express-handlebars");     // node js has handlebars
-
-app.engine(
-  "handlebars",
-  exphbs({
-    helpers: require('./helpers/handlebars').helpers, // helper function for handlebars
-    defaultLayout: "main",                    // default Layout is "main" -> main.handlebars
-  })
-);
-app.set("view engine", "handlebars");     // app.engine("handlebars") has set as a "view engine" in node express, with helpers
-
-const isAuth = require("./config/middleware/isAuthenticated");  // not used
-const isAuth2 = require("./config/middleware/isAuthenticatedfb");  // not used
+var hbs = exphbs.create({ 
+  defaultLayout: "main",
+  extname: '.handlebars'
+})
+app.engine(".handlebars", hbs.engine);
+app.set("view engine", ".handlebars");
 
 const authCheck = require("./config/middleware/attachAuthenticationStatus");
 
@@ -56,7 +56,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(fileUpload());
 app.use(
   session({ secret: config.sessionKey, resave: true, saveUninitialized: true })
 );
@@ -65,9 +65,9 @@ app.use(passport.session());
 
 app.use(authCheck);     // default path is omitted, authCheck function executes if user comes to localhost:3000
 
-app.use(compression());    
+app.use(compression());
 
-require("./routes")(app);
+require("./routes/allroutes")(app);
 
 
 // catch 404 and forward to error handler
@@ -88,9 +88,16 @@ app.use((err, req, res, next) => {
 });
 
 //res.locals
-app.locals.uid = 'undefined';
+// app.locals.uid = 'undefined';
 
 // our module get's exported as app.
 module.exports = app;
 
-// Where's the listen? Open up bin/www, and read the comments.
+
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+  // set our app to listen to the port we set above
+  const server = app.listen(app.get("port"), () =>
+    debug("Express server listening on port " + server.address().port)
+  );
+});

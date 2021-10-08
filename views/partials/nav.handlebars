@@ -1,63 +1,17 @@
 <!-- Navigation -->
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="/">
-                <span class="light"><img class="shield-icon" src="/assets/img/logo.png">Production Report</span>
-            </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-            <ul class="nav navbar-nav">
-                <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-
-                <li>
-                    <div class="page-scroll" >{{username}}</div>
-                </li>
-
-                <li>
-                    <a class="page-scroll" href="/materialmaster/">Master</a>
-                </li>
-
-                <li>
-                    <a class="page-scroll" href="/pricing/">Pricing</a>
-                </li>
-
-                <li>
-                    <a class="page-scroll" href="/inventory/">Inventory</a>
-                </li>
-
-                <li>
-                    <a class="page-scroll" href="/dailyproduction/">Daily Production</a>
-                </li>
-
-                <li>
-                    <a class="page-scroll" href="/timecontrol/">Time Control</a>
-                </li>
-                {{#if isAuthenticated}}
-                <!-- isAuthenticated is given by middle ware-->
-                <li>
-                    <a class="page-scroll" href="/trips/">My Trips</a>
-                </li>
-                <li>
-                    <a href="/users/sign-out" class="page-scroll" data-toggle="modal">Logout</a>
-                </li>
-
-                {{else}}
-                <li>
-                    <a class="page-scroll" data-toggle="modal" data-target="#login-modal">Login/Sign Up</a>
-                </li>
-                {{/if}}
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<!--JavaScript at end of body for optimized loading-->
+{{!-- <script type="text/javascript" src="./css/materialize.css"></script> --}}
+<nav class="blue darken-4">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Car Material Production</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/materialmaster">Master</a></li>
+            <li><a href="/inventory">Inventory</a></li>
+            <li><a href="/dailyproduction">Daily Production</a></li>
+            <li><a href="/timecontrol">Time Control</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
     </div>
-    <!-- /.container -->
 </nav>
+<!-- #091E42 -->
+<!-- give seperate color class to each page -->

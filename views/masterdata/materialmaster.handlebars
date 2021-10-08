@@ -1,19 +1,11 @@
-<link rel="stylesheet" href="/assets/css/trips.css">
-{{> nav }}
-{{> login-modal }}
-{{> new-trip-modal }}
-<div class="all-trips-container container">
-	
-	<div class="row">
-		<div class="trip-container col-xs-12 col-sm-6 col-lg-6">
-			<div class="trip-subcontainer trip-default">
-				<h3 class="lead">
-					{{decodedata kiacode}}
-				</h3>
-			</div>
-		</div>
-	<button id="add-trip-button" data-toggle="modal" data-target="#squarespaceModal" type="button" class="btn btn-circle"><i class="glyphicon glyphicon-plus"></i></button>
-	<!-- open modal window that has id(data-target) : squarespaceModal -->
-	
-	</div>
+<div>
+	<h1>Material Master</h1>
+	<a class="waves-effect waves-light btn-large" id='uploadkia' onclick="doupload()" >Upload Kia Material Master File (xlsx)</a>
+	<form action="/profile" method="post" enctype="multipart/form-data">
+		<input id='fileinput1' type="file" name="avatar" />
+	</form>
+	<a class="waves-effect waves-light btn-large">Upload SAP and Kia Material Master File (xlsx)</a>
+	<a class="waves-effect waves-light btn-large">Open Material Master</a>
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/js_in_handlebars/materialmaster.js"></script>

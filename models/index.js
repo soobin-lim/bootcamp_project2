@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
+// const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 // __dirname = /Users/bootcamp/tdm-mxc-fsf-pt-06-2021-u-c/bootcamp_project2/models
@@ -16,21 +16,22 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-fs
-  .readdirSync(__dirname)
-  .filter(file => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
-  })      //[ 'DailyProductionReport.js', 'TimeControl.js' ]
-  .forEach(file => {    // file name has to follow this rule.
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
-  });
+const model1 = require('./materialmaster/KiaMaterial');
+const model2 = require('./materialmaster/SapAndKiaMaterial');
 
-// Object.keys(db).forEach(modelName => {
-//   if (db[modelName].associate) {
-//     db[modelName].associate(db);
-//   }
-// });
+const model3 = require('./production_report/DailyProductionReport');
+// const model4 = require('./materialmaster/KiaMaterial');
+
+const model5 = require('./timecontrol/TimeControl');
+// const model6 = require('./materialmaster/KiaMaterial');
+
+db.KiaMaterial = model1;
+db.SapAndKiaMaterial = model2;
+db.DailyProductionReport = model3;
+// db.model4 = model4;
+db.TimeControl = model5;
+// db.model6 = model6;
+
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
