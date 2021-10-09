@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const KiaMaterial = sequelize.define(
-    'KiaMaterial',
+  const kiamaterial = sequelize.define(
+    'kiamaterial',
     {
       material: {
         type: DataTypes.STRING,
@@ -29,5 +29,5 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false
     }
     );
-  return KiaMaterial;
+  return kiamaterial;
 }

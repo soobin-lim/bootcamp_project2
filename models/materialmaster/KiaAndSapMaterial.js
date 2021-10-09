@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const KiaAndSapMaterial = sequelize.define(
-    'KiaAndSapMaterial',
+  const kiaandsapmaterial = sequelize.define(
+    'kiaandsapmaterial',
     {
       status:{
         type: DataTypes.STRING,
@@ -27,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     //   modelName: 'sap_and_kia_material',
     // }
   );
-  return KiaAndSapMaterial;
+  return kiaandsapmaterial;
 }

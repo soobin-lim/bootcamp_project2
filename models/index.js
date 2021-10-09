@@ -5,12 +5,8 @@
 const Sequelize = require('sequelize');
 // const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-// NODE_ENV is from node js, (Heroku, Node js)
-// Switching (production, test, dev) by the server just to sequelize
-const config = require(__dirname + '/../config/config.json')[env];
-// sequelize and cli
+const config = require(__dirname + '/../config/config.json')[env];    // there are three object in config file
 // __dirname = /Users/bootcamp/tdm-mxc-fsf-pt-06-2021-u-c/bootcamp_project2/models
-
 const db = {};
 
 let sequelize;
@@ -21,13 +17,13 @@ if (config.use_env_variable) {
   // console.log('option2', config.database, config.username, config.password, config);
 }
 
-const model1 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
-const model2 = require('./materialmaster/KiaAndSapMaterial')(sequelize, Sequelize);
+const model1 = require('./materialmaster/kiamaterial')(sequelize, Sequelize);
+const model2 = require('./materialmaster/kiaandsapmaterial')(sequelize, Sequelize);
 
-const model3 = require('./production_report/DailyProductionReport')(sequelize, Sequelize);
+const model3 = require('./production_report/dailyproductionreport')(sequelize, Sequelize);
 // const model4 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
-const model5 = require('./timecontrol/TimeControl')(sequelize, Sequelize);
+const model5 = require('./timecontrol/timecontrol')(sequelize, Sequelize);
 // const model6 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
 db.KiaMaterial = model1;

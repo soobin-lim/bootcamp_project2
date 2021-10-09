@@ -4,8 +4,8 @@
 // class DailyProductionReport extends Model { }
 module.exports = (sequelize, DataTypes) => {
 
-const DailyProductionReport = sequelize.define(
-  'DailyProductionReport',
+const dailyproductionreport = sequelize.define(
+  'dailyproductionreport',
   {
     material: {
       type: DataTypes.STRING,
@@ -54,7 +54,7 @@ const DailyProductionReport = sequelize.define(
   //   modelName: 'sap_and_kia_material',
   // }
 );
-return DailyProductionReport;
+return dailyproductionreport;
 }
 
 // return DailyProductionReport;
