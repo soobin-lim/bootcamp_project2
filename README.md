@@ -11,7 +11,7 @@ git push heroku main
 
 # heroku logging
 https://devcenter.heroku.com/articles/logging
-
+heroku logs --tail
 
 # Automatic dyno restarts
 The dyno manager restarts all your app’s dynos whenever you:
