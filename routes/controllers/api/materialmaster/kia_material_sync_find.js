@@ -2,11 +2,11 @@ const db = require('../../../../models/index.js'); // import a db
 const path = require('path');
 // const KiaMaterial = db.tutorials
 const read_excel_kia_material_master_schema = require('./read_excel_kia_material_master_schema');
-const KiaMaterial = db.KiaMaterial; //db.KiaMaterial
+// const KiaMaterial = db.KiaMaterial; //db.KiaMaterial
 
 // const readXlsxFile = require("read-excel-file/node");
 
-const uploadkiamaterials = async (req, res) => {
+const upload_kia_materials = async (req, res) => {
 
   // if (req.file == undefined) {
   //   return res.status(400).send("Req.file is undefined");
@@ -63,52 +63,11 @@ const myfunction = async function (excel_file_path) {
   }
 }
 
-
-
-
-//     .then((rows) => {    // doesn't read value kindly
-//       // skip header
-//       rows.shift();
-//       // console.log(rows);
-//       let kiamaterials = [];
-
-//       rows.forEach((row) => {
-//         console.log(row)
-//         let kiamaterial = {
-//           material: row[0],
-//           sapmaterial: row[1],
-//           description: row[2],
-//           pac: row[3],
-//         };
-
-//         kiamaterials.push(kiamaterial);
-//       });
-//       // console.log(kiamaterials);
-//       KiaMaterial.bulkCreate(kiamaterials)
-//         .then(() => {
-//           res.status(200).send({
-//             message: "Sync(KiaMaterial) is finished: "
-//           });
-//         })
-//         .catch((error) => {
-//           res.status(500).send({
-//             message: "Fail to import data into database!",
-//             error: error.message,
-//           });
-//         });
-//     }).catch(err => console.log(err));
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send({
-//       message: "Could not upload the file: " + req.body.filename,
-//     });
-//   }
-// };
-
-const getKiaMaterials = (req, res) => {
-  KiaMaterial.findAll()
+const getKiaMaterials = async function(req, res) {
+  await db.KiaMaterial.findAll()
     .then((data) => {
-      res.send(data);
+      // res.send(data);
+      return data;
     })
     .catch((err) => {
       res.status(500).send({
@@ -119,6 +78,6 @@ const getKiaMaterials = (req, res) => {
 };
 
 module.exports = {
-  uploadkiamaterials,
+  upload_kia_materials,
   getKiaMaterials,
 };

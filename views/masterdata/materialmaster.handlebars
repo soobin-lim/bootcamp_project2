@@ -1,7 +1,9 @@
 <div>
 	<h1>Material Master</h1>
-	<a class="waves-effect waves-light btn-large" id='uploadkia' onclick="doupload()" >Upload Kia Material Master File (xlsx)</a>
-	<form action="/profile" method="post" enctype="multipart/form-data">
+	<a class="waves-effect waves-light btn-large" id='uploadkia' onclick="uploadfile()" >Upload Kia Material Master File (xlsx)</a>
+	<!-- button link is in onlink -->
+  
+  <form action="/profile" method="post" enctype="multipart/form-data">
 		<input id='fileinput1' type="file" name="avatar" />
 	</form>
 	<table>
@@ -16,13 +18,71 @@
             {{#each filelist as |file|}}
               <tr>
                 <td>{{file}}</td>
-                <td ><button class='kia_apply_btn' data-filename={{file}}>Sync, Delete</button></td> <!--//{{@index}} -->
+                <td ><button class='kia_apply_btn' data-filename={{file}}>Sync</button></td>
               </tr>
             {{/each}}            
         </tbody>
-      </table>
+        
+  </table>
 	<a class="waves-effect waves-light btn-large">Upload SAP and Kia Material Master File (xlsx)</a>
+  
+  <table>
+        <thead>
+          <tr>
+              <th>Material</th>
+              <th>Sap Material</th>
+              <th>Description</th>
+              <th>PAC</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {{kiamaterials}}
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+              </tr>
+        </tbody>
+  </table>
+
+	<a class="waves-effect waves-light btn-large">Upload SAP and Kia Material Master File (xlsx)</a>
+
+  <table>
+        <thead>
+          <tr>
+              <th>File Name</th>
+              <th>Sync</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {{#each filelist as |file|}}
+              <tr>
+                <td>{{file}}</td>
+                <td ><button class='sap_apply_btn' data-filename={{file}}>Sync, Delete</button></td>
+              </tr>
+            {{/each}}            
+        </tbody>
+  </table>
 	<a class="waves-effect waves-light btn-large">Open Material Master</a>
+  <table>
+        <thead>
+          <tr>
+              <th>Material</th>
+              <th>Sap Material</th>
+              <th>Description</th>
+              <th>PAC</th>
+          </tr>
+        </thead>
+
+        <tbody>
+              <tr>
+                <td></td> <!-- receive material master database -->
+              </tr>
+        </tbody>
+  </table>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/js/js_in_handlebars/materialmaster.js"></script>

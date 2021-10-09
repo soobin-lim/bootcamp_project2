@@ -1,27 +1,20 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const SapAndKiaMaterial = sequelize.define(
-    'SapAndKiaMaterial',
+  const KiaAndSapMaterial = sequelize.define(
+    'KiaAndSapMaterial',
     {
+      status:{
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       material: {
         type: DataTypes.STRING,
         allowNull: true,
-        primaryKey: true
       },
       sapmaterial: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      pac: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [4]
-        }
+        primaryKey: true
       },
     },
     {
@@ -34,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     //   modelName: 'sap_and_kia_material',
     // }
   );
-  return SapAndKiaMaterial;
+  return KiaAndSapMaterial;
 }

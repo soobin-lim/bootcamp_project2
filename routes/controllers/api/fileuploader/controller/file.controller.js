@@ -2,7 +2,7 @@ const uploadFile = require("../middleware/upload");
 const fs = require("fs");
 const baseUrl = "http://localhost:3000/files/";   // this path.. is just used to return file's url(to download, to show files exist)
 
-const upload = async (req, res) => {
+const upload = async (req, res) => {      // uploading file
   try {
     await uploadFile(req, res);
 
@@ -11,7 +11,7 @@ const upload = async (req, res) => {
     }
 
     res.status(200).send({
-      message: "Uploaded the file successfully: " + req.file.originalname,
+      message: "Uploaded the file successfully: " + req.file.originalname,  // good working code
     });
   } catch (err) {
     console.log(err);
@@ -28,7 +28,7 @@ const upload = async (req, res) => {
   }
 };
 
-const getListFiles = (req, res) => {
+const getListFiles = (req, res) => {    // It may work because this is api of the other person.
   const directoryPath = __basedir + "/public/assets/uploads/";
 
   fs.readdir(directoryPath, function (err, files) {
