@@ -1,3 +1,4 @@
+// /api/materialmaster
 const router = require('express').Router(); //   /kiamaterial
 const kiaMaterialRoutes = require('./kiamaterialroute');
 
@@ -5,8 +6,10 @@ const kiaMaterialRoutes = require('./kiamaterialroute');
 const controller = require("../fileuploader/controller/file.controller");
 
 // Scheme and mysql function
-const excelController = require("./excelcontroller");
+const kiamaterial_sync_find = require("./kiamaterial_sync_find");
 
+// /api/materialmaster/uploadkiamaterials
+router.post('/uploadkiamaterials', async (req, res) => await kiamaterial_sync_find.uploadkiamaterials(req, res));
 
 router.use('/', kiaMaterialRoutes);
 // router.post("/upload", upload.single("file"), excelController.upload);  //   /kiamaterial/upload // doesn't work // not used
@@ -21,10 +24,10 @@ router.get("/showuploads", async (req, res) => {
   const FileLists = fileLists.get({ plain: true });
   res.render('materialmaster', FileLists);
 });
-// materialmaster/api/showuploads
-router.get("/kiamaterials", excelController.getKiaMaterials);   // findall kiamaterials
 
-router.get("/kiamaterials/:material", excelController.getKiaMaterials);   // find one kiamaterials (pending)
+// materialmaster/api/showuploads
+router.get("/kiamaterials", kiamaterial_sync_find.getKiaMaterials);   // findall kiamaterials
+router.get("/kiamaterials/:material", kiamaterial_sync_find.getKiaMaterials);   // find one kiamaterials (pending)
 
 
 module.exports = router;

@@ -1,3 +1,5 @@
+// this is for uploading every files into public/assets/uploads
+
 const util = require("util");
 const multer = require("multer");
 const maxSize = 10 * 1024 * 1024;

@@ -10,8 +10,8 @@
   // })
 // })
 
-
-function doupload() {
+// upload kia material master file
+function doupload() {       // send POST request to upload a file(in input[type=file] in masterdata/materialmaster handlebars))
     var input = document.getElementById("fileinput1");
     var formData = new FormData();
     formData.append('file', input.files[0]);
@@ -25,6 +25,21 @@ function doupload() {
     alert('your file has been uploaded');
     // location.reload();
 };
+
+
+$(document).ready(function() {      // what's wrong?
+  console.log('document ready - message from materialmaster.js');
+  $("button.kia_apply_btn").click(function() {
+      var filename = $(this).attr("data-filename");
+      var formData = new FormData();
+      formData.append('filename', filename);
+      fetch('http://localhost:3000/api/materialmaster/uploadkiamaterials',{
+        method:'POST',
+        body: formData
+      });
+  });
+});
+
 
 // function AnonymousHandler(){
 //   console.log('public/js/login - anonymous handler ');

@@ -1,15 +1,12 @@
-// const { Model, DataTypes } = require('sequelize');
-// const sequelize = require('../../config/connection');
-
-// class SapAndKiaMaterial extends Model { }
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-
   const SapAndKiaMaterial = sequelize.define(
     'SapAndKiaMaterial',
     {
       material: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: true,
+        primaryKey: true
       },
       sapmaterial: {
         type: DataTypes.STRING,
@@ -27,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
     },
+    {
+      timestamps: false
+    }
     // {
     //   sequelize,
     //   freezeTableName: true,
