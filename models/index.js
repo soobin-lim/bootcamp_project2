@@ -5,7 +5,11 @@
 const Sequelize = require('sequelize');
 // const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];    // there are three object in config file
+const config = require(__dirname + '../config/config.json')[env];    // there are three object in config file
+
+//before '/../config/config.json'
+//after '../config/config.json'
+
 // __dirname = /Users/bootcamp/tdm-mxc-fsf-pt-06-2021-u-c/bootcamp_project2/models
 const db = {};
 
@@ -17,20 +21,22 @@ if (config.use_env_variable) {
   // console.log('option2', config.database, config.username, config.password, config);
 }
 
-const model11 = require('./materialmaster/kiamaterial')(sequelize, Sequelize);
-const model22 = require('./materialmaster/kiaandsapmaterial')(sequelize, Sequelize);
+const model2 = require('./materialmaster/kiaandsapmaterial')(sequelize, Sequelize);
 
-const model33 = require('./production_report/dailyproductionreport')(sequelize, Sequelize);
+const model1 = require('./materialmaster/kiamaterial')(sequelize, Sequelize);
+
+const model3 = require('./production_report/dailyproductionreport')(sequelize, Sequelize);
 // const model4 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
-const model55 = require('./timecontrol/timecontrol')(sequelize, Sequelize);
+const model5 = require('./timecontrol/timecontrol')(sequelize, Sequelize);
 // const model6 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize);
 
-db.kiamaterial = model11;
-db.sapmaterial = model22;
-db.dailyproductionreport = model33;
+db.sapmaterial = model2;
+
+db.kiamaterial = model1;
+db.dailyproductionreport = model3;
 // db.model4 = model4;
-db.timecontrol = model55;
+db.timecontrol = model5;
 // db.model6 = model6;
 
 
