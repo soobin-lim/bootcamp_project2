@@ -26,7 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      timestamps: false
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'kiamaterial',
+      modelName: 'kiamaterial'
     }
     );
   return kiamaterial;

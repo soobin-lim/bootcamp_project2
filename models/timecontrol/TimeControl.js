@@ -28,6 +28,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false
       }
-    });
+    },
+    {
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'kiamaterial',
+      modelName: 'kiamaterial'
+    }
+  );
   return timecontrol;
 }

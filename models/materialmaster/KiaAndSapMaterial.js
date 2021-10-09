@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      timestamps: false
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'kiaandsapmaterial',
+      modelName: 'kiaandsapmaterial'
     }
     // {
     //   sequelize,
