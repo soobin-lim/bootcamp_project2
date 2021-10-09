@@ -1,9 +1,9 @@
 'use strict';
 
-// const fs = require('fs');
-// const path = require('path');
+const fs = require('fs');     // be carefaul
+const path = require('path');    // be carefaul
 const Sequelize = require('sequelize');
-// const basename = path.basename(__filename);
+const basename = path.basename(__filename);    // be carefaul
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];    // there are three object in config file
 
