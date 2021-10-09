@@ -23,7 +23,7 @@ const upload_sap_materials = async (req, res) => {
     // await db.SapMaterial.bulkCreate(resolved_excel_file_data)
     await resolved_excel_file_data.forEach((row) => {
       if(row.sapmaterial != undefined && row.material != undefined){
-        db.SapMaterial.create(row);    
+        db.sapmaterial.create(row);    
       }
       // console.log(row.status, row.material, row.sapmaterial)
     })
@@ -62,8 +62,8 @@ const myfunction = async function (excel_file_path) {
   }
 }
 
-const getSapMaterials = async function(req, res) {
-  await db.SapMaterial.findAll()
+const getsapmaterials = async function(req, res) {
+  await db.sapmaterial.findAll()
     .then((data) => {
       // res.send(data);
       return data;
@@ -78,5 +78,5 @@ const getSapMaterials = async function(req, res) {
 
 module.exports = {
   upload_sap_materials,
-  getSapMaterials,
+  getsapmaterials,
 };

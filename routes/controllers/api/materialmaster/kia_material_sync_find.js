@@ -63,8 +63,8 @@ const myfunction = async function (excel_file_path) {
   }
 }
 
-const getKiaMaterials = async function(req, res) {
-  await db.KiaMaterial.findAll()
+const getkiamaterials = async function(req, res) {
+  await db.kiamaterial.findAll()
     .then((data) => {
       // res.send(data);
       return data;
@@ -79,5 +79,5 @@ const getKiaMaterials = async function(req, res) {
 
 module.exports = {
   upload_kia_materials,
-  getKiaMaterials,
+  getkiamaterials,
 };

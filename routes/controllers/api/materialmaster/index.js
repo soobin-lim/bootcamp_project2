@@ -23,8 +23,8 @@ router.post('/uploadkiamaterials', async (req, res) => await kia_material_sync_f
 router.post('/uploadsapmaterials', async (req, res) => await sap_material_sync_find.upload_sap_materials(req, res));
 
 const render_material_master = async (req, res, next) => {
-  const kia_materials = await kia_material_sync_find.getKiaMaterials(req, res);
-  const sap_materials = await sap_material_sync_find.getSapMaterials(req, res);
+  const kia_materials = await kia_material_sync_find.getkiamaterials(req, res);
+  const sap_materials = await sap_material_sync_find.getsapmaterials(req, res);
 
   var kia_materials_plain_true = {};
   var sap_materials_plain_true = {};
