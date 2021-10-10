@@ -1,24 +1,24 @@
 'use strict';
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   const kiamaterial = sequelize.define(
     'kiamaterial',
     {
       material: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
         primaryKey: true
       },
       sapmaterial: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       description: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       pac: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         // validate: {
         //   len: [4]

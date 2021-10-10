@@ -1,33 +1,40 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   const timecontrolreport = sequelize.define(
-    'timecontrol',
+    'timecontrolreport',
     {
       line: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true
       },
       cause: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
       time: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
       description: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false
       },
       date: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false
       }
-    });
+    },
+    {
+      timestamps: false,
+      freezeTableName: true,
+      tableName: 'timecontrolreport',
+      modelName: 'timecontrolreport'
+    }
+    );
   return timecontrolreport;
 }

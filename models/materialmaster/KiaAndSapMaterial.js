@@ -1,18 +1,18 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   const kiaandsapmaterial = sequelize.define(
     'kiaandsapmaterial',
     {
       status:{
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       material: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
       },
       sapmaterial: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true,
         primaryKey: true
       },

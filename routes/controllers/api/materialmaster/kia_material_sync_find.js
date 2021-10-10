@@ -26,20 +26,20 @@ const upload_kia_materials = async (req, res) => {
   console.log(excel_file_path)
   let resolved_excel_file_data = await myfunction(excel_file_path);  // pending (Promise)
   console.log(resolved_excel_file_data);
-  try{
-    await db.KiaMaterial.bulkCreate(resolved_excel_file_data)
-    .then(() => {
-      res.status(200).send({
-        message: "Sync(KiaMaterial) is finished: "
+  try {
+    await db.kiamaterial.bulkCreate(resolved_excel_file_data)
+      .then(() => {
+        res.status(200).send({
+          message: "Sync(KiaMaterial) is finished: "
+        });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: "Fail to import data into database!",
+          error: error.message,
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).send({
-        message: "Fail to import data into database!",
-        error: error.message,
-      });
-    });
-  } catch(err){
+  } catch (err) {
     console.log(err);
   }
 }
@@ -63,21 +63,33 @@ const myfunction = async function (excel_file_path) {
   }
 }
 
-const getkiamaterials = async function(req, res) {
-  await db.kiamaterial.findAll()
-    .then((data) => {
-      // res.send(data);
-      return data;
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials.",
-      });
-    });
-};
+const getOnlyKiaMaterials = function (req, res) {
+
+  var get_kiamaterials_sub_data
+  const get_kiamaterials_sub = async function () {
+    get_kiamaterials_sub_data = await db.kiamaterial.findAll({ raw: true });
+    return get_kiamaterials_sub_data;
+  }
+
+  const get_kiamaterials_promise = new Promise((resolve, reject) => {
+    get_kiamaterials_sub()
+      .then(() => {
+        resolve(get_kiamaterials_sub_data)
+      })
+      .catch((err) => {
+        console.log(err + 'getkiamaterials_')
+        reject();
+      })
+  })
+
+  get_kiamaterials_promise.then((val)=>{
+    // console.log(val); 
+    res.json(val);
+  });
+
+}
 
 module.exports = {
   upload_kia_materials,
-  getkiamaterials,
+  getOnlyKiaMaterials,
 };

@@ -18,28 +18,27 @@ const upload_sap_materials = async (req, res) => {
   console.log(excel_file_path);
   let resolved_excel_file_data = await myfunction(excel_file_path);  // pending (Promise)
   console.log(resolved_excel_file_data);
-  
-  try{
-    // await db.SapMaterial.bulkCreate(resolved_excel_file_data)
+
+  try {
+    // await db.kiaandsapmaterial.bulkCreate(resolved_excel_file_data)
     await resolved_excel_file_data.forEach((row) => {
-      if(row.sapmaterial != undefined && row.material != undefined){
-        db.sapmaterial.create(row);    
+      if (row.sapmaterial != undefined && row.material != undefined) {
+        db.kiaandsapmaterial.create(row);
       }
       // console.log(row.status, row.material, row.sapmaterial)
     })
-
-    .then(() => {
-      res.status(200).send({
-        message: "Sync(SapMaterial) is finished: "
+      .then(() => {
+        res.status(200).send({
+          message: "Sync(SapMaterial) is finished: "
+        });
+      })
+      .catch((error) => {
+        res.status(500).send({
+          message: "Fail to import data into database!",
+          error: error.message,
+        });
       });
-    })
-    .catch((error) => {
-      res.status(500).send({
-        message: "Fail to import data into database!",
-        error: error.message,
-      });
-    });
-  } catch(err){
+  } catch (err) {
     console.log(err);
   }
 }
@@ -62,21 +61,75 @@ const myfunction = async function (excel_file_path) {
   }
 }
 
-const getsapmaterials = async function(req, res) {
-  await db.sapmaterial.findAll()
-    .then((data) => {
-      // res.send(data);
-      return data;
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials.",
-      });
+const getOnlySapMaterials = function (req, res) {
+
+  var get_sap_kia_materials_sub_data
+  const getSapMaterials_subFunction = async function () {
+    get_sap_kia_materials_sub_data
+      = await db.kiaandsapmaterial.findAll({ raw: true, attributes: ['sapmaterial'] });
+    get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.map(v => v.sapmaterial);
+    get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.filter(v => v[0] == "J");
+    console.log(get_sap_kia_materials_sub_data);
+    return get_sap_kia_materials_sub_data;
+  }
+
+  const getSapMaterialsPromise = new Promise((resolve, reject) => {
+    getSapMaterials_subFunction()
+      .then(() => {
+        resolve(get_sap_kia_materials_sub_data)
+      })
+      .catch((err) => {
+        console.log(err + 'getkiamaterials_')
+        reject();
+      })
+  })
+
+  getSapMaterialsPromise.then((val) => {
+    // console.log(val); 
+    res.json(val);
+  });
+}
+
+const getOnlySapAndKiaMaterials = function (req, res) {
+
+  var get_sap_kia_materials_sub_data
+  const getSapMaterials_subFunction = async function () {
+    get_sap_kia_materials_sub_data
+      = await db.kiaandsapmaterial.findAll({ raw: true, attributes: ['material', 'sapmaterial'] });
+    get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.filter(v => v.sapmaterial[0]=="J");
+    get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.map(v => {
+      let o = {};
+      let key = v.material;
+      let value = v.sapmaterial;
+      o[key] = value;
+      return o;
     });
-};
+
+    // get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.filter(v => v.[0]=="J");
+    console.log(get_sap_kia_materials_sub_data);
+    return get_sap_kia_materials_sub_data;
+  }
+
+  const getSapMaterialsPromise = new Promise((resolve, reject) => {
+    getSapMaterials_subFunction()
+      .then(() => {
+        resolve(get_sap_kia_materials_sub_data)
+      })
+      .catch((err) => {
+        console.log(err + 'getkiamaterials_')
+        reject();
+      })
+  })
+
+  getSapMaterialsPromise.then((val) => {
+    // console.log(val); 
+    res.json(val);
+  });
+}
+
 
 module.exports = {
   upload_sap_materials,
-  getsapmaterials,
+  getOnlySapMaterials,
+  getOnlySapAndKiaMaterials
 };

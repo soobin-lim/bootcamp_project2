@@ -2,24 +2,24 @@
 // const sequelize = require('../../config/connection');
 
 // class DailyProductionReport extends Model { }
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
 
   const dailyproductionreport = sequelize.define(
     'dailyproductionreport',
     {
       material: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: true
       },
       pac: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           len: [4]
         }
       },
       type: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           isIn: {
@@ -29,15 +29,15 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       client: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      Date: {
-        type: DataTypes.DATETIME,
+      date: {
+        type: Sequelize.DATE,
         allowNull: false
       },
       Shift: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
           isIn: {
@@ -50,8 +50,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false,
       freezeTableName: true,
-      tableName: 'kiamaterial',
-      modelName: 'kiamaterial'
+      tableName: 'dailyproductionreport',
+      modelName: 'dailyproductionreport'
     }
     // {
     //   sequelize,
