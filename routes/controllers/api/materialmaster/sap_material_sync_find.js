@@ -97,13 +97,13 @@ const getOnlySapAndKiaMaterials = function (req, res) {
     get_sap_kia_materials_sub_data
       = await db.kiaandsapmaterial.findAll({ raw: true, attributes: ['material', 'sapmaterial'] });
     get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.filter(v => v.sapmaterial[0]=="J");
-    get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.map(v => {
-      let o = {};
-      let key = v.material;
-      let value = v.sapmaterial;
-      o[key] = value;
-      return o;
-    });
+    // get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.map(v => {
+    //   let o = {};
+    //   let key = v.material;
+    //   let value = v.sapmaterial;
+    //   o[key] = value;
+    //   return o;
+    // });
 
     // get_sap_kia_materials_sub_data = get_sap_kia_materials_sub_data.filter(v => v.[0]=="J");
     console.log(get_sap_kia_materials_sub_data);

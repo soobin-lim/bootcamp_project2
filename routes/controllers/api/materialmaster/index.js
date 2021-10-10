@@ -19,7 +19,7 @@ router.post('/uploadsapmaterials', async (req, res) => await sap_material_sync_f
 // /api/materialmaster/getonlykiamaterials
 router.get('/getonlykiamaterials', kia_material_sync_find.getOnlyKiaMaterials);
 
-//  /api/materialmaster/getonlykiamaterials
+//  /api/materialmaster/getonlysapmaterials
 router.get('/getonlysapmaterials', sap_material_sync_find.getOnlySapMaterials);
 
 //  /api/materialmaster/getonlysapandkiamaterials

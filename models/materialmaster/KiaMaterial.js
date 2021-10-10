@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
         primaryKey: true
       },
+      materialwithoutdash: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       sapmaterial: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -20,9 +24,6 @@ module.exports = (sequelize, Sequelize) => {
       pac: {
         type: Sequelize.STRING,
         allowNull: false,
-        // validate: {
-        //   len: [4]
-        // }
       },
     },
     {

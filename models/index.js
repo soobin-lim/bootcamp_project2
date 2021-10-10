@@ -40,7 +40,6 @@ db.kiamaterial = model1;
 // db.model4 = model4;
 // db.model6 = model6;
 
-
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
