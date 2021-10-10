@@ -57,7 +57,7 @@ app.set("view engine", ".handlebars");
 const authCheck = require("./config/config_function/attachAuthenticationStatus");
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
