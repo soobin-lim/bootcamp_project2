@@ -1,18 +1,21 @@
 <div>
   <h1>Material Master</h1>
 
-  <input id="autoComplete"/>
+  <h6>Find Kia Material : </h6><input id="autoComplete"/> 
   
   <br>
   <br>
 
-  <a class="waves-effect waves-light btn-large" id='uploadkia' onclick="uploadfile()">Upload Kia Material Master File
-    (xlsx)</a>
-  <!-- button link is in onlink -->
-
+  <H5>File Storage</H5>
+  <h6>Select your excel file</h6>
   <form action="/profile" method="post" enctype="multipart/form-data">
     <input id='fileinput1' type="file" name="avatar" />
   </form>
+
+  <a class="waves-effect waves-light btn-large" id='uploadkia' onclick="uploadfile()">Upload your file</a>
+  <!-- button link is in onlink -->
+
+
   <table>
     <thead>
       <tr>
