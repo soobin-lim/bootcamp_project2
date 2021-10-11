@@ -7,7 +7,8 @@ const db = require('../../../../models/');
 const util = require('util')
 const fs = require('fs')
 const readdir = util.promisify(fs.readdir)
-
+// const urlsetting = require(process.cwd()+'global')
+console.log(process.cwd()+'global');
 // router setting
 
 // /api/materialmaster/uploadkiamaterials

@@ -15,16 +15,6 @@ const favicon = require('serve-favicon');
 const fileuploadRouter = require("./routes/controllers/api/fileuploader/routes/");
 const app = express();
 
-app.locals= {
-  site: {
-      title: 'ExpressBootstrapEJS',
-      description: 'A boilerplate for a simple web application with a Node.JS and Express backend, with an EJS template with using Twitter Bootstrap.'
-  },
-  author: {
-      name: 'Cory Gross',
-      contact: 'CoryG89@gmail.com'
-  }
-}
 var corsOptions = {
   origin: "http://localhost:8081"
 };

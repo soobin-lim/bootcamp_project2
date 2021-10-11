@@ -13,8 +13,6 @@ function uploadfile() {       // send POST request to upload a file(in input[typ
     body: formData
   });   // + encodeURIComponent(entry.name)
   // alert('your file has been uploaded');
-  M.toast({html: 'File has been uploaded successfully',
-  displayLength: 4000
-})
+  alert('File has been uploaded successfully');
   location.reload();  
 };

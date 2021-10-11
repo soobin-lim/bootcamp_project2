@@ -4,7 +4,7 @@ document.querySelector("#autoComplete").addEventListener("navigate", function (e
 });
 
 function get_material_and_sap_material() {
-  const app_url = 'https://peaceful-spire-37164.herokuapp.com/'
+  const app_url = 'http://localhost:3000/'
   const pathofdata = app_url+'api/materialmaster/getonlysapandkiamaterials';
   fetch(pathofdata)
     .then((r) => r.json())
