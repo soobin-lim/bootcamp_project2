@@ -1,3 +1,5 @@
+console.log('heroku url is ',global.heroku_url);
+
 $(document).ready(function() {      // what's wrong?
   console.log('document ready - message from materialmaster.js');
   // assigning dynamically callback function to each btns

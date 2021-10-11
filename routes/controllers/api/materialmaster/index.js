@@ -32,7 +32,7 @@ router.get('/getonlysapandkiamaterials', sap_material_sync_find.getOnlySapAndKia
 const render_material_master = async (req, res) => {
   // materialize.Autocomplete();
 
-  var files1={};
+  var files1 = {};
   const readFiles1 = async () => {
     files1 = await db.kiamaterial.findAll({ raw: true });
   }
@@ -43,7 +43,7 @@ const render_material_master = async (req, res) => {
       resolve(files1);
       return files1;
     }).catch((error) => {
-      console.log('q33',error, 'q33'); reject()
+      console.log('q33', error, 'q33'); reject()
       return error;
     });
   }).catch((error) => {
@@ -51,8 +51,8 @@ const render_material_master = async (req, res) => {
     return error;
   });
 
-  var files2={};
-  
+  var files2 = {};
+
   const readFiles2 = async () => {
     files2 = await db.kiaandsapmaterial.findAll({ raw: true });
   }
@@ -60,13 +60,13 @@ const render_material_master = async (req, res) => {
     readFiles2().then((val) => {
       if (val == undefined) { };   // yes it is undefined
       resolve(files2);    // resolve is working I guess..
-      return files2;      
+      return files2;
     }).catch((error) => {
       console.log('q33', error, 'q33'); reject()
       return error;
     });
   }).catch((error) => {
-    console.log('q44',error, 'q44');
+    console.log('q44', error, 'q44');
     return error;
   });
 
@@ -101,10 +101,10 @@ const render_material_master = async (req, res) => {
       // console.log(typeof values[1], typeof values[1][0], typeof JSON.stringify(values[1][0]))
       res.render('masterdata/materialmaster',
         {
-          kiamaterials: kiacode.slice(0,4),
-          sapmaterials: sapandkiacode.slice(0,4),
+          kiamaterials: kiacode.slice(0, 4),
+          sapmaterials: sapandkiacode.slice(0, 4),
           filelist: filelist,
-          // Promise.all three promises
+          // Promise.all three promises,
         }
       )
     });

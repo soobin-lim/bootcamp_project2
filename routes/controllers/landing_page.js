@@ -1,4 +1,8 @@
-exports.index = (req, res) => res.render('landing/index');
+exports.index = (req, res) => res.render('landing/index',
+  {
+    layout: 'main'
+  },
+);
 
 
 // application controller
