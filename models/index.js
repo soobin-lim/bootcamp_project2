@@ -1,17 +1,32 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs');     // be carefaul
+const path = require('path');    // be carefaul
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
+const basename = path.basename(__filename);    // be carefaul
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
+
+// __dirname = /Users/bootcamp/tdm-mxc-fsf-pt-06-2021-u-c/bootcamp_project2/models
 const db = {};
 
 let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+if (process.env.JAWSDB_URL || config.use_env_variable) {
+  // for Heroku
+  console.log('config.use_env_variable',config.use_env_variable)
+  console.log('process.env.JAWSDB_URL', process.env.JAWSDB_URL);
+  sequelize = new Sequelize(process.env.JAWSDB_URL, {});
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  if (config.use_env_variable) {
+    //for Heroku
+    console.log('config.use_env_variable',config.use_env_variable)
+    sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  } else {
+    console.log('config.use_env_variable',config.use_env_variable)
+    sequelize = new Sequelize(config.database, config.username, config.password, config);   //Dialect needs to be explicitly supplied as of v4.0.0
+    // using .env's information..
+    // console.log('option2', config.database, config.username, config.password, config);
+  }
 }
+
 // DB setup
 // const db = {};
 
