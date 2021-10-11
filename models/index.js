@@ -1,11 +1,9 @@
 const fs = require('fs');     // be carefaul
 const path = require('path');    // be carefaul
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);    // be carefaul
+const basename = path.basename(module.filename);    // be carefaul
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-
-// __dirname = /Users/bootcamp/tdm-mxc-fsf-pt-06-2021-u-c/bootcamp_project2/models
 const db = {};
 
 let sequelize;
