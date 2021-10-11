@@ -25,7 +25,13 @@ const basename = path.basename(__filename);    // be carefaul
 //   // console.log('option2', config.database, config.username, config.password, config);
 // }
 // }
+// Before
+// const env = process.env.NODE_ENV || 'development';
 
+// After
+const env = process.env.NODE_ENV.trim() || 'development';    // add .trim()
+
+console.log(env, 'env:');
 
 // DB setup
 const db = {};
@@ -35,7 +41,7 @@ if (process.env.JAWSDB_URL) {
   // for Heroku
   sequelize = new Sequelize(process.env.JAWSDB_URL, {});
 } else {
-  const env = process.env.NODE_ENV || "development";
+  // const env = process.env.NODE_ENV || "development";
 
   // const config = path.resolve(__dirname, "..", "config", "config.json")[env];
   const config = require(__dirname + '/../config/config.json')[env];
