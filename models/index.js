@@ -29,9 +29,11 @@ const basename = path.basename(__filename);    // be carefaul
 // const env = process.env.NODE_ENV || 'development';
 
 // After
-const env = process.env.NODE_ENV.trim() || 'development';    // add .trim()
-
-console.log(env, 'env:');
+// console.log('process.env.NODE_ENV')
+// console.log(process.env.NODE_ENV)
+// console.log('process.env:',process.env)
+const env = process.env.NODE_ENV || 'development';    // add .trim()
+console.log('process.env.NODE_ENV : ',env );     // NODE_ENV has to be production in herokuheroku logs --tail
 
 // DB setup
 const db = {};
