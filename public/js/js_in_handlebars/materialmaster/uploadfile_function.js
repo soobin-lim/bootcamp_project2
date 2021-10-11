@@ -8,7 +8,9 @@ function uploadfile() {       // send POST request to upload a file(in input[typ
   // formData.append('user', 'hubot');  // user is not necessary
   // let entry = document.getElementById("file").files[0];
   console.log('js/js_in_handlebars/materialmaster/uploadfile.js : ', formData);
-  fetch('http://localhost:3000/upload', {
+  const myurl = 'http://localhost:3000/upload';
+  
+  fetch(myurl, {
     method: 'POST',
     body: formData
   });   // + encodeURIComponent(entry.name)

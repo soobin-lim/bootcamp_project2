@@ -6,8 +6,8 @@
   "author": "Soobin Lim",
   "license": "soobin",
   "scripts": {
-    "start": "export NODE_ENV=production&&node ./bin/www",
-    "dev": "export NODE_ENV=development&&nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "devDependencies": {
     "firebase": "^9.1.1",

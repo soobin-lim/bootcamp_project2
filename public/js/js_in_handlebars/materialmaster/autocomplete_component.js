@@ -20,8 +20,8 @@ const autoCompleteJS = new autoComplete({
   selector: "#autoComplete",
   placeHolder: "Material...",
   data: {
-    src: get_material_and_sap_material(),//["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],
-    keys:['sapmaterial'],
+    src: ["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],  //get_material_and_sap_material(),     //  1. this.
+    // keys:['sapmaterial'],                     // 2. and this
     cache: true,
   },
   resultsList: {

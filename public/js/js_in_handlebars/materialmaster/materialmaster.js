@@ -8,7 +8,9 @@ $(document).ready(function () {      // what's wrong?
     console.log('filename:', filename);
     var formData = new FormData();
     formData.append('filename', filename);
-    fetch('http://localhost:3000/api/materialmaster/uploadkiamaterials', {
+    const myurl = 'http://localhost:3000/api/materialmaster/uploadkiamaterials';
+    myurl = '';
+    fetch(myurl, {
       method: 'POST',
       body: formData
     });
