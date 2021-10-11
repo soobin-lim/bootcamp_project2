@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "root",
-    "password": "12345678",
+    "password": null,
     "database": "production_report",
     "host": "127.0.0.1",
     "dialect": "mysql"
