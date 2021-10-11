@@ -43,3 +43,5 @@ Note: Sequelize will only use Model files, it's the table representation. On the
 
 # heroku
 
+# sequelize cli
+https://stackoverflow.com/questions/43099808/bash-sequelize-command-not-found

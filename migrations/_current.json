@@ -1,0 +1,143 @@
+{
+    "tables": {
+        "kiaandsapmaterial": {
+            "tableName": "kiaandsapmaterial",
+            "schema": {
+                "status": {
+                    "allowNull": true,
+                    "field": "status",
+                    "seqType": "Sequelize.STRING"
+                },
+                "material": {
+                    "allowNull": true,
+                    "field": "material",
+                    "seqType": "Sequelize.STRING"
+                },
+                "sapmaterial": {
+                    "allowNull": true,
+                    "primaryKey": true,
+                    "field": "sapmaterial",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "kiamaterial": {
+            "tableName": "kiamaterial",
+            "schema": {
+                "material": {
+                    "allowNull": true,
+                    "primaryKey": true,
+                    "field": "material",
+                    "seqType": "Sequelize.STRING"
+                },
+                "materialwithoutdash": {
+                    "allowNull": true,
+                    "field": "materialwithoutdash",
+                    "seqType": "Sequelize.STRING"
+                },
+                "sapmaterial": {
+                    "allowNull": true,
+                    "field": "sapmaterial",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "allowNull": false,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "pac": {
+                    "allowNull": false,
+                    "field": "pac",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "dailyproductionreport": {
+            "tableName": "dailyproductionreport",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "material": {
+                    "allowNull": true,
+                    "field": "material",
+                    "seqType": "Sequelize.STRING"
+                },
+                "pac": {
+                    "allowNull": false,
+                    "field": "pac",
+                    "seqType": "Sequelize.STRING"
+                },
+                "type": {
+                    "allowNull": false,
+                    "field": "type",
+                    "seqType": "Sequelize.STRING"
+                },
+                "client": {
+                    "allowNull": false,
+                    "field": "client",
+                    "seqType": "Sequelize.STRING"
+                },
+                "date": {
+                    "allowNull": false,
+                    "field": "date",
+                    "seqType": "Sequelize.DATE"
+                },
+                "Shift": {
+                    "allowNull": false,
+                    "field": "Shift",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "timecontrol": {
+            "tableName": "timecontrol",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "line": {
+                    "allowNull": true,
+                    "field": "line",
+                    "seqType": "Sequelize.STRING"
+                },
+                "cause": {
+                    "allowNull": false,
+                    "field": "cause",
+                    "seqType": "Sequelize.STRING"
+                },
+                "time": {
+                    "allowNull": false,
+                    "field": "time",
+                    "seqType": "Sequelize.STRING"
+                },
+                "description": {
+                    "allowNull": true,
+                    "field": "description",
+                    "seqType": "Sequelize.STRING"
+                },
+                "date": {
+                    "allowNull": true,
+                    "field": "date",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "path": "/Users/bootcamp/bootcamp_project2/migrations/_current.json",
+    "backupPath": "/Users/bootcamp/bootcamp_project2/migrations/_current_bak.json",
+    "exists": false,
+    "revision": 1
+}

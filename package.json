@@ -38,10 +38,11 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
     "mysql2": "^2.3.0",
+    "node": "^16.10.0",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "read-excel-file": "^5.2.10",
-    "sequelize": "^6.6.5",
+    "sequelize": "^6.7.0",
     "serve-favicon": "^2.5.0"
   },
   "engines": {
