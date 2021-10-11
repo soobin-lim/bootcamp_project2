@@ -1,4 +1,4 @@
-const db = require('../../../../models/index.js'); // import a db
+const db = require('../../../../models/index.js'); 
 const path = require('path');
 // const KiaMaterial = db.tutorials
 const read_excel_kia_material_master_schema = require('./read_excel_kia_material_master_schema');
