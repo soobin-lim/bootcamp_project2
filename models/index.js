@@ -65,5 +65,5 @@ db.Sequelize = Sequelize;
 
 
 
-
+//1
 module.exports = db;
