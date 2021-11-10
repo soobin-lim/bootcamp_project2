@@ -9,4 +9,3 @@ module.exports = (req, res, next) => {
   return res.redirect("/");
 };
 
-// 1. req.

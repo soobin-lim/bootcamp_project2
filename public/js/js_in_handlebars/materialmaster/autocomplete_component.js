@@ -1,19 +1,5 @@
-document.querySelector("#autoComplete").addEventListener("navigate", function (event) {
-  // "event.detail" carries the autoComplete.js "feedback" object
-  console.log(event.detail);
-});
-
-function get_material_and_sap_material() {
-  const app_url = 'http://localhost:3000/'
-  const pathofdata = app_url+'api/materialmaster/getonlysapandkiamaterials';
-  fetch(pathofdata)
-    .then((r) => r.json())
-    .then((data) => {
-      console.log(data)
-      autoCompleteJS.data.src = data;
-    })
-    .catch((e) => console.log('Booo'));
-}
+// autoCompleteJS component use fetch(GET) Method 
+// to get both material codes and put them into autoCompleteJS componet
 
 const autoCompleteJS = new autoComplete({
   key: "material",
@@ -45,3 +31,26 @@ const autoCompleteJS = new autoComplete({
     }
   }
 });
+
+document.querySelector("#autoComplete").addEventListener("navigate", function (event) {
+  // "event.detail" carries the autoComplete.js "feedback" object
+  console.log(event.detail);
+});
+
+async function get_material_and_sap_material() {
+  // const app_url = 'http://localhost:3000/'
+  // const pathofdata = app_url + 'api/materialmaster/getonlysapandkiamaterials';
+  // fetch(pathofdata)
+  const getData = await fetch('/api/materialmaster/getonlysapandkiamaterials', {
+    method: 'GET'
+  })
+  getData = getData.json();
+  console.log('-----get_material_and_sap_material_------'+getData);
+  autoCompleteJS.data.src = data;
+  // }).then((r) => r.json())
+  //   .then((data) => {
+  //     console.log(data)
+  //     autoCompleteJS.data.src = data;
+  //   })
+  //   .catch((e) => console.log('Booo'));
+}
