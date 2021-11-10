@@ -18,7 +18,8 @@ if (process.env.JAWSDB_URL) {
     config.password,
     config
   );   //Dialect needs to be explicitly in v4.0.0
-  console.log(sequelize)
+  // console.log(sequelize)
+  // index.test.js required
 }
 
 const model1 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize); // module not found?

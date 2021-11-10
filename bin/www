@@ -12,7 +12,6 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-const db = require("../models");
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -91,23 +90,21 @@ function onListening() {
 
 // In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
 
-async function sync1 (){
-  await db.kiamaterial.sync();
-  await db.kiaandsapmaterial.sync();
-  await db.timecontrol.sync();
-  await db.dailyproductionreport.sync();
-}
+// async function sync1 (){
+//   await db.kiamaterial.sync();
+//   await db.kiaandsapmaterial.sync();
+//   await db.timecontrol.sync();
+//   await db.dailyproductionreport.sync();
+// }
 
-sync1().then((val) => {
-  async () =>await db.kiamaterial.sync();
+// sync1().then(() => {
+  // db.sequelize.sync().then(() => {  // it deletes all data..    // sync({}) != sync()
+  //   // set our app to listen to the port we set above
+  //   const server = app.listen(app.get("port"), () =>
+  //     debug("Express server listening on port " + server.address().port)
+  //   );
+  // });
   
-  console.log(val);
-  // we sync the models with our db
-  db.sequelize.sync().then(() => {  // it deletes all data..    // sync({}) != sync()
-    // set our app to listen to the port we set above
-    const server = app.listen(app.get("port"), () =>
-      debug("Express server listening on port " + server.address().port)
-    );
-  });
-}).catch(v=>console.log(v));
+
+// }).catch(v=>console.log(v));
 

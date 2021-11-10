@@ -10,6 +10,14 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const favicon = require('serve-favicon');
 const fileuploadRouter = require("./routes/controllers/api/fileuploader/routes/");
+
+const db = require("./models");
+
+  db.sequelize.sync({ force: false })
+  .then(() => {
+    console.log(`Database & tables created!`)
+  }).catch(err => console.log('sequelize sync force error  :  '+err))
+
 const app = express();
 
 var corsOptions = {
