@@ -1,3 +1,10 @@
+#!/usr/bin/env node
+
+// Express can launch a www executable to handle certain tasks.
+// www goes in bin (sometimes .bin to keep it hidden)
+
+// This way, we can set certain properties here
+// rather than having them take up space in server.js.
 const debug = require("debug")("express-example");
 
 // we bring in the app we exported from server.js
@@ -7,6 +14,8 @@ const app = require("../server");
 const db = require("../models");
 
 app.set("port", process.env.PORT || 3000);
+// In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
+
 async function sync1 (){
   await db.kiamaterial.sync();
   await db.kiaandsapmaterial.sync();
