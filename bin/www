@@ -1,19 +1,94 @@
 #!/usr/bin/env node
 
-// Express can launch a www executable to handle certain tasks.
-// www goes in bin (sometimes .bin to keep it hidden)
+/**
+ * Module dependencies.
+ */
 
-// This way, we can set certain properties here
-// rather than having them take up space in server.js.
-const debug = require("debug")("express-example");
-
-// we bring in the app we exported from server.js
 const app = require("../server");
+const debug = require("debug")("express-example");
+var http = require('http');
 
-// we bring in the models we exported with index.js
+/**
+ * Get port from environment and store in Express.
+ */
+
 const db = require("../models");
 
-app.set("port", process.env.PORT || 3000);
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+ var server = http.createServer(app);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+ server.listen(port);
+ server.on('error', onError);
+ server.on('listening', onListening);
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+ function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+ function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
 // In development, you may need to drop existing tables and re-sync database. Just use force: true as following code:
 
 async function sync1 (){

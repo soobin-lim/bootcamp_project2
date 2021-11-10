@@ -5,6 +5,7 @@ const basename = path.basename(module.filename);    // be carefaul in deleting t
 const env = process.env.NODE_ENV || 'development';
 // entering into json file's development or production variables
 const config = require(__dirname + '/../config/config.json')[env];  
+const db = {};
 
 let sequelize;
 
@@ -17,14 +18,14 @@ if (process.env.JAWSDB_URL) {
     config.password,
     config
   );   //Dialect needs to be explicitly in v4.0.0
+  console.log(sequelize)
 }
 
-const model1 = require('./materialmaster/kiamaterial')(sequelize, Sequelize);
-const model2 = require('./materialmaster/kiaandsapmaterial')(sequelize, Sequelize);
-const model3 = require('./production_report/dailyproductionreport')(sequelize, Sequelize);
-const model5 = require('./timecontrol/timecontrol')(sequelize, Sequelize);
+const model1 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize); // module not found?
+const model2 = require('./materialmaster/KiaAndSapMaterial')(sequelize, Sequelize);
+const model3 = require('./production_report/DailyProductionReport')(sequelize, Sequelize);
+const model5 = require('./timecontrol/TimeControl')(sequelize, Sequelize);
 
-const db = {};
 
 db.kiamaterial = model1;
 db.kiaandsapmaterial = model2;
