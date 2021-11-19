@@ -1,3 +1,7 @@
+// To Read zppr101 excel file
+// It requires excel file to have these column names
+// To not to change modify like this,
+// Need to write down some words to not to fail in reading 
 const schema = {
   'Status': {
     prop: 'status',
@@ -9,7 +13,7 @@ const schema = {
     type: String,
     required: false,
   },
-  'SAPMaterial': {
+  'SAPMaterial': {      
     prop: 'sapmaterial',
     type: String,
     required: true,
@@ -19,6 +23,7 @@ const schema = {
 
 const read_excel = function (filePathAndName) {
   const readXlsxFile = require('read-excel-file/node');
+  console.log(filePathAndName)
   try {
     return readXlsxFile(filePathAndName, { schema })
       .then((rows, errors) => {
@@ -32,7 +37,7 @@ const read_excel = function (filePathAndName) {
         }
       })
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     return err;
   }
 }

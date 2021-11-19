@@ -21,6 +21,12 @@ exports.loginUser = (req, res) => {
   res.json("/");
 };
 
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
 exports.loginAnonymous = async (req, res) => {
   var uid;
   console.log('controller -loginAnonymous')

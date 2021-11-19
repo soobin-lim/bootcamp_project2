@@ -1,11 +1,11 @@
 module.exports = app => {
 
 	const landing_page = require('./landing_page');
-	const materialmaster = require('./menu1materialmaster');
-	const dailyproduction = require('./menu2dailyproduction');
-	const inventory = require('./menu3inventory');
-	const timecontrol = require('./menu4timecontrol');
-	const login = require('./menu5login');
+	const materialmaster = require('./materialmaster');
+	const dailyproduction = require('./dailyproduction');
+	const inventory = require('./inventory');
+	const timecontrol = require('./timecontrol');
+	const login = require('./login');
 	
 	const api = require('./controllers/api');
 

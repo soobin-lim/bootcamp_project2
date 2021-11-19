@@ -1,29 +1,28 @@
-// console.log('heroku url is ');
+// file upload, 
+document.addEventListener('DOMContentLoaded', function () {
 
-$(document).ready(function () {      // what's wrong?
-  console.log('document ready - message from materialmaster.js');
   // assigning dynamically callback function to each btns
-  $("button.kia_apply_btn").click(function () {
+  $("button.kia_apply_btn").click(async function () {
     var filename = $(this).attr("data-filename");
     console.log('filename:', filename);
-    var formData = new FormData();
-    formData.append('filename', filename);
-    const myurl = 'http://localhost:3000/api/materialmaster/uploadkiamaterials';
-    myurl = '';
-    fetch(myurl, {
+    const response = await fetch('/api/materialmaster/uploadkiamaterials', {
       method: 'POST',
-      body: formData
+      body: JSON.stringify({ filename }),
+      headers: { 'Content-Type': 'application/json' }
     });
+    console.log(response.url, response.ok)
   });
 
-  $("button.sap_apply_btn").click(function () {
+  //sync sap
+  $("button.apply_btn").click(async function () {
     var filename = $(this).attr("data-filename");
-    var formData = new FormData();
-    formData.append('filename', filename);
-    fetch('http://localhost:3000/api/materialmaster/uploadsapmaterials', {
+    console.log('filename:', filename);
+    const response = await fetch('/api/materialmaster/uploadmasters', {
       method: 'POST',
-      body: formData
+      body: JSON.stringify({ filename }),
+      headers: { 'Content-Type': 'application/json' }
     });
+    console.log(response.url, response.ok)
   });
 
   /* input event listener */
@@ -35,5 +34,7 @@ $(document).ready(function () {      // what's wrong?
       document.getElementById("uploadkia").setAttribute('class', "btn-floating btn-large waves-effect waves-light red")
     }
   });
+
+ 
 
 });

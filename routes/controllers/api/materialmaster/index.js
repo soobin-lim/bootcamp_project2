@@ -1,42 +1,62 @@
 const router = require('express').Router(); //   /kiamaterial
 const kia_material_sync_find = require("./kia_material_sync_find");
-const sap_material_sync_find = require("./sap_material_sync_find");
+const master_api = require("./master_api");
+const group = require("./group");
+router.use('/group', group);
 // const { stringify } = require('querystring');
+
 // const path = require('path');   // be careful in deleting require('path'), it may stops app..
+
 const db = require('../../../../models/');
 const util = require('util')
 const fs = require('fs')
 const readdir = util.promisify(fs.readdir)
+
 // const urlsetting = require(process.cwd()+'global')
-console.log(process.cwd()+'global');
+
+// console.log(process.cwd() + 'global');
+
 // router setting
 
 // /api/materialmaster/uploadkiamaterials
-router.post('/uploadkiamaterials', async (req, res) => await kia_material_sync_find.upload_kia_materials(req, res));
+router.post('/uploadkiamaterials', async (req, res) => await kia_material_sync_find.upload_masters(req, res));
 
 // /api/materialmaster/uploadsapmaterials
-router.post('/uploadsapmaterials', async (req, res) => await sap_material_sync_find.upload_sap_materials(req, res));
+router.post('/uploadmasters', async (req, res) => await master_api.upload_masters(req, res));
+
+// /api/materialmaster/updatekiamaterials
+router.post('/updatekiamaster', async (req, res) => await kia_material_sync_find.update_kia_master(req, res));
 
 // /api/materialmaster/getonlykiamaterials
 router.get('/getonlykiamaterials', kia_material_sync_find.getOnlyKiaMaterials);
 
 //  /api/materialmaster/getonlysapmaterials
-router.get('/getonlysapmaterials', sap_material_sync_find.getOnlySapMaterials);
+router.get('/getonlysapmaterials', master_api.getOnlySapMaterials);
 
 //  /api/materialmaster/getonlysapandkiamaterials
-router.get('/getonlysapandkiamaterials', sap_material_sync_find.getOnlySapAndKiaMaterials);
+router.get('/getonlysapandkiamaterials', master_api.getOnlySapAndKiaMaterials);
 
+router.get('/getdescription/:code', master_api.getDescription);
 
+// /api/materialmaster/group
 
 // rendering 
-
 const render_material_master = async (req, res) => {
   // materialize.Autocomplete();
-
   var files1 = {};
   const readFiles1 = async () => {
     files1 = await db.kiamaterial.findAll({ raw: true });
   }
+
+  // updating kia master( inserting sap code next to kia code(using 'material without dash') )
+  const checkPromise = new Promise(async (resolve, reject) => {
+    await master_api.check_and_update_kia_master();
+    try {
+      resolve();
+    } catch (err) {
+      console.log(err);
+    }
+  })
 
   var kia_materials_promise = new Promise((resolve, reject) => {
     readFiles1().then((val) => {
@@ -44,11 +64,12 @@ const render_material_master = async (req, res) => {
       resolve(files1);
       return files1;
     }).catch((error) => {
-      console.log('q33', error, 'q33'); reject()
+      // console.log('q33', error, 'q33'); 
+      reject()
       return error;
     });
   }).catch((error) => {
-    console.log('q44', error, 'q44');
+    // console.log('q44', error, 'q44');
     return error;
   });
 
@@ -63,11 +84,11 @@ const render_material_master = async (req, res) => {
       resolve(files2);    // resolve is working I guess..
       return files2;
     }).catch((error) => {
-      console.log('q33', error, 'q33'); reject()
+      // console.log('q33', error, 'q33'); reject()
       return error;
     });
   }).catch((error) => {
-    console.log('q44', error, 'q44');
+    // console.log('q44', error, 'q44');
     return error;
   });
 
@@ -84,31 +105,49 @@ const render_material_master = async (req, res) => {
       resolve(files);
       return files;
     }).catch((error) => {
-      console.log(error, 'q3'); reject()
+      // console.log(error, 'q3'); reject()
       return error;
     });
   }).catch((error) => {
-    console.log(error, 'q4');
+    // console.log(error, 'q4');
     return error;
   });
 
-  Promise.all([kia_materials_promise, kia_and_sap_materials_promise, file_list_promise])
-    .then((values) => {
-      let kiacode = values[0];
-      let sapandkiacode = values[1];
-      let filelist = values[2];
-      // console.log(values[0][0], values[1][0], values[2], 'three');
-      // console.log("three promises in materialmaster are done")
-      // console.log(typeof values[1], typeof values[1][0], typeof JSON.stringify(values[1][0]))
-      res.render('masterdata/materialmaster',
-        {
-          kiamaterials: kiacode.slice(0, 4),
-          sapmaterials: sapandkiacode.slice(0, 4),
-          filelist: filelist,
-          // Promise.all three promises,
-        }
-      )
-    });
+  // First execute checkPromise(update codes) and execute All Other Promises
+  checkPromise.then(() => {
+    //handleResolved
+    console.log('checkPromise is resolved')
+    try { renderer() } catch (err) { console.log(err) }
+  },
+    //handleRejected
+    () => {
+      console.log('checkPromise is not resolved')
+      try { renderer() } catch (err) { console.log(err) }
+
+    })
+
+  function renderer() {
+    Promise.all([kia_materials_promise, kia_and_sap_materials_promise, file_list_promise])
+      .then((values) => {
+        let kiacode = values[0];
+        let sapandkiacode = values[1];
+        // console.log(sapandkiacode)
+        let filelist = values[2];
+        // console.log(values[0][0], values[1][0], values[2], 'three');
+        // console.log("three promises in materialmaster are done")
+        // console.log(typeof values[1], typeof values[1][0], typeof JSON.stringify(values[1][0]))
+        res.render('masterdata/materialmaster',
+          {
+            // kiamaterials: kiacode.slice(0, 4),
+            // sapmaterials: sapandkiacode.slice(0, 4),
+            kiamaterials: kiacode,
+            sapmaterials: sapandkiacode,
+            filelist: filelist,
+            // Promise.all three promises,
+          }
+        )
+      })
+  }
 };
 router.get('/', render_material_master);
 

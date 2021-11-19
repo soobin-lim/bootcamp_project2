@@ -1,127 +1,190 @@
 <div>
-  <h1>Material Master</h1>
-
-  <h6>Find Kia Material : </h6><input id="autoComplete" />
-
-  <br>
-  <br>
 
   <div class="row">
-    <div class="col s6">
-      <form action="#">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file" id="fileinput1">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-          <div>
-          </div>
+
+    <div class="col s12">
+      <h3>Material Master</h3>
+      <h4>File Upload</h4>
+      <!-- Uploaded File List -->
+      <div class="col s6">
+        <table>
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>Type</th>
+              <th>Apply</th>
+              <th>Delete</th>
+              <th>Date</th>
+              <th>What's New</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each filelist as |file|}}
+            <tr>
+              <td>{{file}}</td>
+              {{#if (filenamecheck file)}}
+              <td>SAP(zppr101)</td>
+              {{else}}
+              <td>KIA Portal</td>
+              {{/if}}
+              <td><button class='apply_btn' data-filename={{file}}>Apply</button></td>
+              <td><button class='delete_btn' data-filename={{file}}>Delete</button></td>
+              <td>Today</td>
+              <td>New code(1)</td>
+            </tr>
+            {{/each}}
+          </tbody>
+
+        </table>
+      </div>
+      <!-- Uploaded File input field and button -->
+      <div class="col s6 align-middle h-100">
+        <!-- input field(type: file) -->
+        <div class="col s6">
+          <form action="#">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input type="file" id="fileinput1">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </form>
         </div>
-    </div>
-    <div class="col s6">
-      <a class="btn-floating btn-large waves-effect waves-light red disabled" id='uploadkia' onclick="uploadfile()"><i
-          class="material-icons">add</i></a>
+        <!-- File upload button(floating btn) -->
+
+        <div class="col s6">
+          <a class="btn-floating btn-large waves-effect waves-light red disabled" id='uploadkia'
+            onclick="uploadfile()"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+      <p> - Uploading Excel File Notice -</p>
+      <p> Excel File(column) name(s) should be like this </p>
+      <p> * zppr101.xlsx (Status, Material, SAPMaterial)</p>
+      <p> * materialmaster.xlsx (Material, Description, PAC, PGN)</p>
     </div>
   </div>
 
 
-  </form>
-
-  {{!-- <a class="waves-effect waves-light btn-middle" id='uploadkia' onclick="uploadfile()">UPLOAD</a> --}}
 
 
-  <!-- button link is in onlink -->
+  {{!-- Quick Search (auto complete) --}}
+  <div class="row">
+    <div class="col s12">
+      <h4>Quick Search</h4>
+      <div class="row">
 
+        <div class="input-field col s4">
+          <i class="material-icons prefix">find_in_page</i>
+          <input type="text" id="autocomplete-input" class="autocomplete_kia_master">
+          <label for="autocomplete-input">Kia Material</label>
+        </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>File Name</th>
-        <th>Sync</th>
-      </tr>
-    </thead>
+        <div class="input-field col s4">
+          <i class="material-icons prefix">find_in_page</i>
+          <input type="text" id="autocomplete-input2" class="autocomplete_sap_master">
+          <label for="autocomplete-input2">Sap Material</label>
+        </div>
 
-    <tbody>
-      {{#each filelist as |file|}}
-      <tr>
-        <td>{{file}}</td>
-        <td><button class='kia_apply_btn' data-filename={{file}}>Sync</button></td>
-      </tr>
-      {{/each}}
-    </tbody>
+        <div class="col s4">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1"></label>
+          </div>
+        </div>
 
-  </table>
+      </div>
+    </div>
+  </div>
 
+  {{!-- Set Group --}}
+  <div class="row">
+    <div class="col">
+      <h4>Group</h4>
+      {{!-- group chips --}}
+      
+      <div class="chips chips-initial"></div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each (getUniqueDescriptions kiamaterials) as |description|}}
+          <tr>
+            <td>Group</td>
+            <td>{{description}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
+  {{!-- Show Both Material Master Codes --}}
+  <div class="row">
+    <div class="col s6">
+      <h4>KIA Portal(Material Master)</h4>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Material</th>
-        <th>Sap Material</th>
-        <th>Description</th>
-        <th>PAC</th>
-      </tr>
-    </thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>PGN</th>
+            <th>Description</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      {{#each kiamaterials as |kiamaterial|}}
-      <tr>
-        <td>{{kiamaterial.material}}</td>
-        <td>{{kiamaterial.sapmaterial}}</td>
-        <td>{{kiamaterial.description}}</td>
-        <td>{{kiamaterial.pac}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+        <tbody>
+          {{#each kiamaterials as |kiamaterial|}}
+          <tr>
+            <td>{{kiamaterial.material}}</td>
+            <td>{{kiamaterial.sapmaterial}}</td>
+            <td>{{kiamaterial.description}}</td>
+            <td>{{kiamaterial.pac}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="col s1">
+      {{!-- space --}}
+    </div>
+    <div class="col s5">
+      <h4>SAP(zppr101)</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Material</th>
+            <th>SAPMaterial</th>
+          </tr>
+        </thead>
 
+        <tbody>
+          {{#each sapmaterials as |sapmaterial|}}
+          <tr>
+            <td>{{sapmaterial.status}}</td>
+            <td>{{sapmaterial.material}}</td>
+            <td>{{sapmaterial.sapmaterial}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>File Name</th>
-        <th>Sync</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {{#each filelist as |file|}}
-      <tr>
-        <td>{{file}}</td>
-        <td><button class='sap_apply_btn' data-filename={{file}}>Sync, Delete</button></td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>Material</th>
-        <th>SAPMaterial</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {{#each sapmaterials as |sapmaterial|}}
-      <tr>
-        <td>{{sapmaterial.status}}</td>
-        <td>{{sapmaterial.material}}</td>
-        <td>{{sapmaterial.sapmaterial}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  </div>
 
 </div>
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/js_in_handlebars/materialmaster/chip_component.js"></script>
 <script src="/js/js_in_handlebars/materialmaster/uploadfile_function.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.6/dist/autoComplete.min.js"></script>
-<script src="/js/js_in_handlebars/materialmaster/materialmaster.js"></script>
 <script src="/js/js_in_handlebars/materialmaster/autocomplete_component.js"></script>
+<script src="/js/js_in_handlebars/materialmaster/materialmaster.js"></script>

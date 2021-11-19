@@ -1,56 +1,119 @@
-// autoCompleteJS component use fetch(GET) Method 
-// to get both material codes and put them into autoCompleteJS componet
+// auto complete
+document.addEventListener('DOMContentLoaded', async function () {
 
-const autoCompleteJS = new autoComplete({
-  key: "material",
-  selector: "#autoComplete",
-  placeHolder: "Material...",
-  data: {
-    src: ["Sauce - Thousand Island", "Wild Boar - Tenderloin", "Goat - Whole Cut"],  //get_material_and_sap_material(),     //  1. this.
-    // keys:['sapmaterial'],                     // 2. and this
-    cache: true,
-  },
-  resultsList: {
-    element: (list, data) => {
-      if (!data.results.length) {
-        // Create "No Results" message element
-        const message = document.createElement("div");
-        // Add class to the created element
-        message.setAttribute("class", "no_result");
-        // Add message text content
-        message.innerHTML = `<span>Found No Results for "${data.query}"</span>`;
-        // Append message element to the results list
-        list.prepend(message);
+  get_material_and_sap_material();
+  async function get_material_and_sap_material() {
+    const myPromise = new Promise(async (resolve, reject) => {
+      let data = await fetch('/api/materialmaster/getonlysapandkiamaterials', {
+        method: 'GET',
+
+      })
+      data = data.json();
+      // console.log('-----get_material_and_sap_material------' + data);
+      resolve(data);
+    })
+    let merged_kia_null = {}
+    let merged_sap_null = {}
+    myPromise.then(
+      //handleResolve
+      (data) => { // data : received data (material, sapmaterial)
+        data.forEach(data => {
+          if (data.material) {
+            merged_kia_null[data.material] = null;
+          }
+          if (data.sapmaterial) {
+            merged_sap_null[data.sapmaterial] = null;
+          }
+        })
+        // data = JSON.stringify(data);
+        var kia_master_elem = document.querySelector('.autocomplete_kia_master');
+        var sap_master_elem = document.querySelector('.autocomplete_sap_master');
+
+        var sap_master_instance = M.Autocomplete.init(sap_master_elem, {
+          data: merged_sap_null,
+          limit: 5,
+          onAutocomplete: (selected) => {
+            // console.log('onAutocomplete:' + selected) // selected sapmaterial
+            data.every(async (data) => {  // data : received data (material, sapmaterial)
+              if (data.sapmaterial == selected) {
+                // console.log(data.material)
+                getDescription(data.material);
+
+                kia_master_elem.focus();
+                kia_master_elem.value = data.material
+                sap_master_elem.focus();
+
+                return false;
+              }
+              return true
+            })
+          },
+        })
+
+        var kia_master_instance = M.Autocomplete.init(kia_master_elem, {
+          data: merged_kia_null,
+          limit: 5,
+          onAutocomplete: (selected) => {
+            // console.log('onAutocomplete:' + selected) // selected sapmaterial
+            data.every(data => {  // data : received data (material, sapmaterial)
+              if (data.material == selected) {
+                // console.log(data.material)
+                getDescription(data.material);
+
+                sap_master_elem.focus();
+                sap_master_elem.value = data.sapmaterial
+                kia_master_elem.focus();
+
+                return false;
+              }
+              return true
+            })
+
+          },
+        })
+
+      },
+      //handleReject
+      () => {
+        console.log('data reading for autocomplete is failed')
       }
-    },
-    noResults: true,
-  },
-  resultItem: {
-    highlight: {
-      render: true
-    }
+    )
+
+
+  }
+
+  async function getDescription(material) {
+    console.log('finding description')
+    var description_textarea = document.querySelector('#textarea1');
+    // console.log(description_textarea)
+    var description = '';
+    const myPromise = new Promise(async (resolve, reject) => {
+      description = await fetch('/api/materialmaster/getdescription/' + material,
+        { 
+          method: 'GET' 
+        });
+      console.log(description)
+      console.log(description.json())
+      console.log(JSON.stringify(description))
+      resolve(description);
+  
+    })
+
+    myPromise.then(
+      //handleResolved
+      () => {
+        console.log(description)
+        description_textarea.value = description
+      },
+      //handleRejected
+      (err)=>{
+        console.log(err)
+      }
+    ).catch(err=>console.log(err))
+    .finally(data => console.log(data)
+    )
+    return;
   }
 });
 
-document.querySelector("#autoComplete").addEventListener("navigate", function (event) {
-  // "event.detail" carries the autoComplete.js "feedback" object
-  console.log(event.detail);
-});
 
-async function get_material_and_sap_material() {
-  // const app_url = 'http://localhost:3000/'
-  // const pathofdata = app_url + 'api/materialmaster/getonlysapandkiamaterials';
-  // fetch(pathofdata)
-  const getData = await fetch('/api/materialmaster/getonlysapandkiamaterials', {
-    method: 'GET'
-  })
-  getData = getData.json();
-  console.log('-----get_material_and_sap_material_------'+getData);
-  autoCompleteJS.data.src = data;
-  // }).then((r) => r.json())
-  //   .then((data) => {
-  //     console.log(data)
-  //     autoCompleteJS.data.src = data;
-  //   })
-  //   .catch((e) => console.log('Booo'));
-}

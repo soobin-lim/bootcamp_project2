@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (sequelize, Sequelize) => {
   const kiamaterial = sequelize.define(
     'kiamaterial',
@@ -19,14 +17,28 @@ module.exports = (sequelize, Sequelize) => {
       },
       description: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       pac: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
+      pgn: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      pgndescription: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      }
     },
     {
+      hooks: {
+        beforeCreate: (kiamaterial)=>{
+          kiamaterial.materialwithoutdash = kiamaterial.material.replace("-", "");
+          return kiamaterial
+        }
+      },
       timestamps: false,
       freezeTableName: true,
       tableName: 'kiamaterial',

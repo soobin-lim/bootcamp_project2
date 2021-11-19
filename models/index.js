@@ -26,12 +26,13 @@ const model1 = require('./materialmaster/KiaMaterial')(sequelize, Sequelize); //
 const model2 = require('./materialmaster/KiaAndSapMaterial')(sequelize, Sequelize);
 const model3 = require('./production_report/DailyProductionReport')(sequelize, Sequelize);
 const model5 = require('./timecontrol/TimeControl')(sequelize, Sequelize);
-
+const model6 = require('./materialmaster/group')(sequelize, Sequelize);
 
 db.kiamaterial = model1;
 db.kiaandsapmaterial = model2;
 db.dailyproductionreport = model3;
 db.timecontrol = model5;
+db.group = model6;
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

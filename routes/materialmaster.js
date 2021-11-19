@@ -2,7 +2,7 @@
 var express = require('express');
 var router  = express.Router();
 
-var materialmaster = require('./controllers/menu1_materialmaster');
+var materialmaster = require('./controllers/materialmaster');
 
 router.get('/', materialmaster.index);
 

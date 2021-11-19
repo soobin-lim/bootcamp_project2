@@ -10,13 +10,14 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const favicon = require('serve-favicon');
 const fileuploadRouter = require("./routes/controllers/api/fileuploader/routes/");
+const passport = require("passport-local")
 
 const db = require("./models");
 
-  db.sequelize.sync({ force: false })
+db.sequelize.sync({ force: false })
   .then(() => {
     console.log(`Database & tables created!`)
-  }).catch(err => console.log('sequelize sync force error  :  '+err))
+  }).catch(err => console.log('sequelize sync force error  :  ' + err))
 
 const app = express();
 
@@ -25,6 +26,16 @@ var corsOptions = {
 };
 global.__basedir = __dirname;
 
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//     User.findOne({ username: username }, function (err, user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false); }
+//       if (!user.verifyPassword(password)) { return done(null, false); }
+//       return done(null, user);
+//     });
+//   }
+// ));
 
 app.use(cors(corsOptions));
 fileuploadRouter(app);
@@ -40,12 +51,13 @@ app.use(compression());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));  // './views folder' is set to app.set("views")
 require("./routes/allroutes")(app);
-var hbs = exphbs.create({ 
+var hbs = exphbs.create({
   // defaultLayout: "main",
   layoutsDir: 'views/layouts/',
   partialsDir: 'views/partials/',
   defaultLayout: 'main',
-  extname: '.handlebars'
+  extname: '.handlebars',
+  helpers: require('./public/js/helpers/helpers').helpers
 })
 app.engine(".handlebars", hbs.engine);
 app.set("view engine", ".handlebars");
