@@ -105,9 +105,13 @@
     <div class="col">
       <h4>Group</h4>
       {{!-- group chips --}}
-      
-      <div class="chips chips-initial"></div>
-      
+      {{!-- {{groups}}
+      {{#each groups}}
+      <p>{{name}}</p>
+      {{/each}} --}}
+      {{!-- chips' initial data comes in javascript --}}
+      <div class="chips chips-initial"></div> 
+
       <table>
         <thead>
           <tr>
@@ -116,6 +120,7 @@
           </tr>
         </thead>
         <tbody>
+          
           {{#each (getUniqueDescriptions kiamaterials) as |description|}}
           <tr>
             <td>Group</td>

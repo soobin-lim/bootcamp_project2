@@ -1,15 +1,45 @@
 document.addEventListener('DOMContentLoaded', async function () {
+  console.log('------------------')
+  var chipDatas;
+  chipDatas = await getAllChips()
+  console.log('------------------')
+  console.log(chipDatas)
+  console.log(JSON.stringify({chipDatas}))
+  // it is not json 
+  // [
+//   {
+//     "name": "CARPET"
+//   },
+//   {
+//     "name": "CARPET2"
+//   },
+//   {
+//     "name": "HEADLINER"
+//   },
+//   {
+//     "name": "SIDE"
+//   }
+// ]
 
+  // .map(name => JSON.stringify({ tag: name }));
   var chipElems = document.querySelectorAll('.chips');
   var chipInstances = M.Chips.init(chipElems, {
     // data: [
     //   { tag: "Headliner" },
     //   { tag: "Carpet" }
     // ],
+    data: chipDatas,
     placeholder: "Headliner, Carpet, RR Package Tray, Luggage Cover",
     onChipAdd: chipAdd,
     onChipDelete: chipDelete
   });
+
+  async function getAllChips() {
+    const allchips = await fetch('/api/materialmaster/group', {
+      method: 'GET'
+    })
+    return allchips
+  }
 
   async function chipAdd(e) {
     let chips = document.querySelectorAll('.chip');

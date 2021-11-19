@@ -36,6 +36,7 @@ router.get('/getonlysapmaterials', master_api.getOnlySapMaterials);
 //  /api/materialmaster/getonlysapandkiamaterials
 router.get('/getonlysapandkiamaterials', master_api.getOnlySapAndKiaMaterials);
 
+//  /api/materialmaster/getdescription/:code
 router.get('/getdescription/:code', master_api.getDescription);
 
 // /api/materialmaster/group
@@ -48,11 +49,13 @@ const render_material_master = async (req, res) => {
     files1 = await db.kiamaterial.findAll({ raw: true });
   }
 
+  var groups;
   // updating kia master( inserting sap code next to kia code(using 'material without dash') )
-  const checkPromise = new Promise(async (resolve, reject) => {
+  const updateKiaMasterPromise = new Promise(async (resolve, reject) => {
     await master_api.check_and_update_kia_master();
+    groups = await db.group.findAll();
     try {
-      resolve();
+      resolve(groups);
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +81,7 @@ const render_material_master = async (req, res) => {
   const readFiles2 = async () => {
     files2 = await db.kiaandsapmaterial.findAll({ raw: true });
   }
+
   var kia_and_sap_materials_promise = new Promise((resolve, reject) => {
     readFiles2().then((val) => {
       if (val == undefined) { };   // yes it is undefined
@@ -114,7 +118,9 @@ const render_material_master = async (req, res) => {
   });
 
   // First execute checkPromise(update codes) and execute All Other Promises
-  checkPromise.then(() => {
+  updateKiaMasterPromise.then((groupsall) => {
+    groups = groupsall.map(group => group.name)
+    console.log(groups)
     //handleResolved
     console.log('checkPromise is resolved')
     try { renderer() } catch (err) { console.log(err) }
@@ -143,6 +149,7 @@ const render_material_master = async (req, res) => {
             kiamaterials: kiacode,
             sapmaterials: sapandkiacode,
             filelist: filelist,
+            groups: groups
             // Promise.all three promises,
           }
         )
