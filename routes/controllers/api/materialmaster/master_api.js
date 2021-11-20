@@ -3,7 +3,21 @@ const path = require('path');
 const read_excel_sap_material_master_schema = require('./read_excel_sap_master_schema');
 const read_excel_kia_material_master_schema = require('./read_excel_kia_master_schema');
 
+const { Op } = require("sequelize");
 
+async function findKiaMaterialsUsingGroupName(groupName) {
+  let kiamaterials = await db.kiamaterial.findAll({
+    // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
+    // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
+    raw: true,
+    where: {
+      description: {
+        [Op.substring]: groupName,
+      }
+    }
+  })
+  return kiamaterials;
+}
 const upload_masters = async (req, res) => {
 
   console.log(req.body, "this is sap material_sync_find -> Only excel file is allowed");
@@ -191,7 +205,6 @@ const check_and_update_kia_master = async function (req, res) {
       })
     }
   }
-
 }
 
 module.exports = {
@@ -199,5 +212,6 @@ module.exports = {
   upload_masters,
   getOnlySapMaterials,
   getOnlySapAndKiaMaterials,
-  getDescription
+  getDescription,
+  findKiaMaterialsUsingGroupName
 };

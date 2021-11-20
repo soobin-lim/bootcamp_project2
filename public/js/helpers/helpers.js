@@ -1,3 +1,4 @@
+const master_api = require('../../../routes/controllers/api/materialmaster/master_api')
 var register = function (Handlebars) {
   var helpers = {
     // put all of your helpers inside this object
@@ -6,6 +7,13 @@ var register = function (Handlebars) {
     },
     bar: function () {
       return "BAR";
+    },
+    // in inventory.handlebars
+    findKiaMaterialWithGroupName: async function(groupname) {
+      let kiamaterials = await master_api.findKiaMaterialsUsingGroupName(groupname);
+      console.log(groupname)
+      console.log(kiamaterials)
+      return kiamaterials;
     },
     // in materialmaster.handlebar
     filenamecheck: function (filename) {
@@ -28,9 +36,68 @@ var register = function (Handlebars) {
         return a.localeCompare(b); //using String.prototype.localCompare()
       });
       // console.log(result)
-
       return result;
+    },
+    // in materialmaster.handlebar
+    distributeDescriptionsForEachGroups: function (groupArray, descriptionArray) {
+      groupArray.push("not belongs to")
+      // console.log(groupArray)
+      // console.log(descriptionArray)
+      let resultArray = [];
+      let resultArray2 = [];
 
+      for (let k = 0; k <= groupArray.length - 1; k++) {
+        var innerArray = []
+        resultArray.push(innerArray)
+        // resultArray2.push(innerArray)
+      }
+
+      // console.log('empty array setting :' + resultArray)
+
+      while (descriptionArray.length != 0) {
+        let startLength = descriptionArray.length;
+        var row = []
+        for (let i = 0; i <= groupArray.length - 2; i++) {
+          for (let j = 0; j <= descriptionArray.length - 1; j++) {
+            if (descriptionArray[j].includes(groupArray[i])) {
+              resultArray[i].push(descriptionArray[j]);
+              row[i] = descriptionArray[j];
+              descriptionArray.splice(j, 1);
+              j = j - 1;
+              if (i == groupArray.length - 2) {
+                resultArray[i + 1].push('');
+                row[i + 1] = '';
+                break;
+              }
+              break;
+              // if description doesn't include group name, and 
+            } else if (j == descriptionArray.length - 1) {
+              resultArray[i].push('');
+              row[i] = '';
+              if (i == groupArray.length - 2) {
+                resultArray[i + 1].push(descriptionArray[j]);
+                row[i + 1] = descriptionArray[j];
+                descriptionArray.splice(j, 1);
+                j = j - 1;
+                break;
+              }
+              break;
+            }
+          }
+        }
+        console.log('row' + row.length)
+        resultArray2.push(row)
+        let endLength = descriptionArray.length;
+        if (startLength == endLength) {
+          break;
+        }
+      }
+      resultArray2.forEach(ele => {
+        console.log(ele.length)
+      })
+      console.log(resultArray2)
+
+      return resultArray2
     }
   };
 

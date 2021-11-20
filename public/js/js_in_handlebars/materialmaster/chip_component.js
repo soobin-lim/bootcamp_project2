@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     })
     if (response.ok) {
       alert('Successfully created a group')
-      // document.location.replace('/');
+      document.location.replace('/materialmaster');
     } else {
       alert('Failed to create a group');
     }
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     console.log(response)
     if (response.ok) {
       alert('Successfully deleted a group')
-      // document.location.replace('/');
+      document.location.replace('/materialmaster');
     } else {
       alert('Failed to delete a group');
     }

@@ -115,22 +115,43 @@
       <div class="chips">
         <input class="custom-class">
       </div>
+
+
+
+
+
+
       <table>
         <thead>
           <tr>
-            <th>Group</th>
-            <th>Description</th>
+            {{#each groups}}
+            <th>{{this}}</th>
+            {{/each}}
+            <th>N/A</th>
           </tr>
         </thead>
         <tbody>
-
-          {{#each (getUniqueDescriptions kiamaterials) as |description|}}
+          {{#each (distributeDescriptionsForEachGroups groups (getUniqueDescriptions kiamaterials)) as |row|}}
           <tr>
-            <td>Group</td>
-            <td>{{description}}</td>
+            {{#each row}}
+            <td>{{this}}</td>
+            {{/each}}
           </tr>
           {{/each}}
+          {{!-- {{#each (getUniqueDescriptions kiamaterials) as |description|}}
+          <tr>
+            <td>{{description}}</td>
+          </tr>
+          {{/each}} --}}
         </tbody>
+        {{!-- <tbody>
+          {{#each distributeDescriptionsForEachGroups groups (getUniqueDescriptions kiamaterials)}}
+          <tr>
+            <td></td>
+          </tr>
+          {{/each}}
+
+        </tbody> --}}
       </table>
     </div>
   </div>

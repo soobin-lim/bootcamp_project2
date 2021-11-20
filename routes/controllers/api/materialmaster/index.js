@@ -1,3 +1,4 @@
+
 const router = require('express').Router(); //   /kiamaterial
 const kia_material_sync_find = require("./kia_material_sync_find");
 const master_api = require("./master_api");
@@ -17,7 +18,7 @@ const readdir = util.promisify(fs.readdir)
 // console.log(process.cwd() + 'global');
 
 // router setting
-
+//----------------------------APIS-----------------------
 // /api/materialmaster/uploadkiamaterials
 router.post('/uploadkiamaterials', async (req, res) => await kia_material_sync_find.upload_masters(req, res));
 
@@ -39,8 +40,13 @@ router.get('/getonlysapandkiamaterials', master_api.getOnlySapAndKiaMaterials);
 //  /api/materialmaster/getdescription/:code
 router.get('/getdescription/:code', master_api.getDescription);
 
-// /api/materialmaster/group
-
+// /api/materialmaster/groupname/:groupname
+router.get('/groupname/:groupname', async (req, res) => {
+  const kiamaterials = await master_api.findKiaMaterialsUsingGroupName(req.params.groupname)
+  console.log(kiamaterials);
+  res.json({kiamaterials});
+})
+//----------------------------rendering-----------------------
 // rendering 
 const render_material_master = async (req, res) => {
   // materialize.Autocomplete();

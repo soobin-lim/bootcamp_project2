@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const myPromise = new Promise(async (resolve, reject) => {
       let data = await fetch('/api/materialmaster/getonlysapandkiamaterials', {
         method: 'GET',
-
       })
       data = data.json();
       // console.log('-----get_material_and_sap_material------' + data);
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   }
 
   async function getDescription(material) {
-    console.log('finding description')
+    // console.log('finding description')
     var description_textarea = document.querySelector('#textarea1');
     // console.log(description_textarea)
     var description = '';
@@ -96,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         .then(text => {
           try {
             description = JSON.parse(text);
-            console.log(description)
+            // console.log(description)
 
             resolve(description);
           } catch (err) {
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     myPromise.then(
       //handleResolved
       () => {
-        console.log(description)
+        // console.log(description)
         description_textarea.value = description["description"]
       },
       //handleRejected
@@ -116,7 +115,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log(err)
       }
     ).catch(err => console.log(err))
-      .finally(data => console.log(data)
+      .finally(() => {
+        // console.log(data)
+      }
       )
     return;
   }
