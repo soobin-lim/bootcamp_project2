@@ -17,9 +17,11 @@ var register = function (Handlebars) {
       // console.log(groupsAndKiaMaterials[groupname])
 
       // console.log(groupname)
-      console.log('zzz'+groupsAndKiaMaterials+'kkk')  // undefined..
-      console.log(groupname+'groupname')
-      console.log(groupsAndKiaMaterials[groupname])
+      console.log('zzz' + groupsAndKiaMaterials + 'kkk')  // undefined..
+      console.log(groupname + 'groupname')
+      if (groupsAndKiaMaterials[groupname] == undefined) {
+        console.log('helper finds empty list of kiamaterial with group ' + groupname)
+      }
       // console.log(groupsAndKiaMaterials[groupname])
       return groupsAndKiaMaterials[groupname];
     },

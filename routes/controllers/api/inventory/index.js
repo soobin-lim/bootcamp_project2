@@ -15,7 +15,7 @@ async function getgroups() {
 async function groupsAndKiaMaterialsFunction(groups) {
   let groupsAndKiaMaterials = {};
 
-  for (let i = 0; i < groups.length - 1; i++) {
+  for (let i = 0; i <= groups.length - 1; i++) {
     if (groups[i] != undefined) {
       let kiamaterials = await master_api.findKiaMaterialsUsingGroupName(groups[i])
       kiamaterials.map(kiamaterial => {
