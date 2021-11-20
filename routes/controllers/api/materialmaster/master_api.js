@@ -164,11 +164,8 @@ const getOnlySapAndKiaMaterials = function (req, res) {
 const getDescription = async function (req, res) {
   let code = req.params.code;
   let kiamaterial = await db.kiamaterial.findOne({ where: { materialwithoutdash: code } })
-  console.log(kiamaterial.description);
-  let description = kiamaterial.description;
-  
-  res.json({description: description})
-   
+  // console.log(kiamaterial.description);
+  res.json({description: kiamaterial.description})
 }
 
 const check_and_update_kia_master = async function (req, res) {

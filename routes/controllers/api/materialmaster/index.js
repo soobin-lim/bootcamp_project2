@@ -120,16 +120,15 @@ const render_material_master = async (req, res) => {
   // First execute checkPromise(update codes) and execute All Other Promises
   updateKiaMasterPromise.then((groupsall) => {
     groups = groupsall.map(group => group.name)
-    console.log(groups)
+    // console.log(groups)
     //handleResolved
-    console.log('checkPromise is resolved')
+    // console.log('checkPromise is resolved')
     try { renderer() } catch (err) { console.log(err) }
   },
     //handleRejected
     () => {
       console.log('checkPromise is not resolved')
       try { renderer() } catch (err) { console.log(err) }
-
     })
 
   function renderer() {

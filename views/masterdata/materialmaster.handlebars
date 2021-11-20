@@ -110,8 +110,11 @@
       <p>{{name}}</p>
       {{/each}} --}}
       {{!-- chips' initial data comes in javascript --}}
-      <div class="chips chips-initial"></div> 
-
+      {{!-- <div class="chips chips-initial"></div> --}}
+      <!-- Customizable input  -->
+      <div class="chips">
+        <input class="custom-class">
+      </div>
       <table>
         <thead>
           <tr>
@@ -120,7 +123,7 @@
           </tr>
         </thead>
         <tbody>
-          
+
           {{#each (getUniqueDescriptions kiamaterials) as |description|}}
           <tr>
             <td>Group</td>

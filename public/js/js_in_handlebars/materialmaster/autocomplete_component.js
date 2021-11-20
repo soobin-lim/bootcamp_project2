@@ -1,3 +1,4 @@
+
 // auto complete
 document.addEventListener('DOMContentLoaded', async function () {
 
@@ -89,29 +90,34 @@ document.addEventListener('DOMContentLoaded', async function () {
     var description = '';
     const myPromise = new Promise(async (resolve, reject) => {
       description = await fetch('/api/materialmaster/getdescription/' + material,
-        { 
-          method: 'GET' 
-        });
-      console.log(description)
-      console.log(description.json())
-      console.log(JSON.stringify(description))
-      resolve(description);
-  
+        {
+          method: 'GET'
+        }).then(response => response.text())
+        .then(text => {
+          try {
+            description = JSON.parse(text);
+            console.log(description)
+
+            resolve(description);
+          } catch (err) {
+            console.log(err);
+          }
+        })
     })
 
     myPromise.then(
       //handleResolved
       () => {
         console.log(description)
-        description_textarea.value = description
+        description_textarea.value = description["description"]
       },
       //handleRejected
-      (err)=>{
+      (err) => {
         console.log(err)
       }
-    ).catch(err=>console.log(err))
-    .finally(data => console.log(data)
-    )
+    ).catch(err => console.log(err))
+      .finally(data => console.log(data)
+      )
     return;
   }
 });

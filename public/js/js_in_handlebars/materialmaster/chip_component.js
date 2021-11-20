@@ -1,27 +1,12 @@
 document.addEventListener('DOMContentLoaded', async function () {
-  console.log('------------------')
   var chipDatas;
   chipDatas = await getAllChips()
-  console.log('------------------')
+  chipDatas.map(chipData => {
+    Object.assign(chipData, { 'tag': chipData['name'] })
+    delete chipData['name']
+    return chipData
+  })
   console.log(chipDatas)
-  console.log(JSON.stringify({chipDatas}))
-  // it is not json 
-  // [
-//   {
-//     "name": "CARPET"
-//   },
-//   {
-//     "name": "CARPET2"
-//   },
-//   {
-//     "name": "HEADLINER"
-//   },
-//   {
-//     "name": "SIDE"
-//   }
-// ]
-
-  // .map(name => JSON.stringify({ tag: name }));
   var chipElems = document.querySelectorAll('.chips');
   var chipInstances = M.Chips.init(chipElems, {
     // data: [
@@ -29,29 +14,34 @@ document.addEventListener('DOMContentLoaded', async function () {
     //   { tag: "Carpet" }
     // ],
     data: chipDatas,
-    placeholder: "Headliner, Carpet, RR Package Tray, Luggage Cover",
+    placeholder: "HEADLINER, CARPET, RR Package Tray, Luggage Cover",
     onChipAdd: chipAdd,
     onChipDelete: chipDelete
   });
 
   async function getAllChips() {
-    const allchips = await fetch('/api/materialmaster/group', {
+    let allchips;
+    await fetch('/api/materialmaster/group', {
       method: 'GET'
-    })
+    }).then(response => response.text())
+      .then(text => {
+        try {
+          allchips = JSON.parse(text)
+        } catch (err) {
+          console.log(err)
+        }
+      })
     return allchips
   }
 
-  async function chipAdd(e) {
-    let chips = document.querySelectorAll('.chip');
-    let lastChipNum = document.querySelectorAll('.chip').length - 1
-    let lastChip = chips[lastChipNum]
-    // let lastChipText = lastChip.innerHTML
-    let lastChipText = lastChip.innerText.replace('close', '')
-    lastChipText = lastChipText.slice(0, lastChipText.length - 1)
+  async function chipAdd(e, chip) {
+    let textOfChip = chip.innerText.replace('close', '')
+    textOfChip = textOfChip.slice(0, textOfChip.length - 1)
+    console.log(textOfChip)
     const response = await fetch('/api/materialmaster/group', {
       method: 'POST',
       body: JSON.stringify({
-        name: lastChipText
+        name: textOfChip
       }),
       headers: { 'Content-Type': 'application/json' },
     })
@@ -63,7 +53,19 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
-  function chipDelete(e) {
-    console.log(e)
+  async function chipDelete(e, chip) {
+    let textOfChip = chip.innerText.replace('close', '')
+    // textOfChip = textOfChip.slice(0, textOfChip.length - 1)
+    console.log(textOfChip)
+    const response = await fetch('/api/materialmaster/group/' + textOfChip, {
+      method: 'DELETE'
+    })
+    console.log(response)
+    if (response.ok) {
+      alert('Successfully deleted a group')
+      // document.location.replace('/');
+    } else {
+      alert('Failed to delete a group');
+    }
   }
 })
