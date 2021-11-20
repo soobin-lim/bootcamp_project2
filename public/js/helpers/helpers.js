@@ -1,4 +1,3 @@
-const master_api = require('../../../routes/controllers/api/materialmaster/master_api')
 var register = function (Handlebars) {
   var helpers = {
     // put all of your helpers inside this object
@@ -8,12 +7,21 @@ var register = function (Handlebars) {
     bar: function () {
       return "BAR";
     },
-    // in inventory.handlebars
-    findKiaMaterialWithGroupName: async function(groupname) {
-      let kiamaterials = await master_api.findKiaMaterialsUsingGroupName(groupname);
-      console.log(groupname)
-      console.log(kiamaterials)
-      return kiamaterials;
+    consolelogger: function (input) {
+      // console.log(input)
+      return "2"
+    },
+    getkiamaterialofgroup: function (groupsAndKiaMaterials, groupname) {
+      // return groupsAndKiaMaterials[groupname];
+      // console.log(groupsAndKiaMaterials[groupname]) => this stops the entire app
+      // console.log(groupsAndKiaMaterials[groupname])
+
+      // console.log(groupname)
+      console.log('zzz'+groupsAndKiaMaterials+'kkk')  // undefined..
+      console.log(groupname+'groupname')
+      console.log(groupsAndKiaMaterials[groupname])
+      // console.log(groupsAndKiaMaterials[groupname])
+      return groupsAndKiaMaterials[groupname];
     },
     // in materialmaster.handlebar
     filenamecheck: function (filename) {

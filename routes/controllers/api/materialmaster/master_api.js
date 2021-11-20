@@ -6,17 +6,21 @@ const read_excel_kia_material_master_schema = require('./read_excel_kia_master_s
 const { Op } = require("sequelize");
 
 async function findKiaMaterialsUsingGroupName(groupName) {
-  let kiamaterials = await db.kiamaterial.findAll({
-    // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
-    // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
-    raw: true,
-    where: {
-      description: {
-        [Op.substring]: groupName,
+  if (groupName != undefined) {
+    let kiamaterials = await db.kiamaterial.findAll({
+      // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
+      // attributes: [Sequelize.fn('DISTINCT', Sequelize.col('description')), 'description'],
+      raw: true,
+      where: {
+        description: {
+          [Op.substring]: groupName,
+        }
       }
-    }
-  })
-  return kiamaterials;
+    })
+    return kiamaterials;
+  }else{
+    return undefined;
+  }
 }
 const upload_masters = async (req, res) => {
 
@@ -179,7 +183,7 @@ const getDescription = async function (req, res) {
   let code = req.params.code;
   let kiamaterial = await db.kiamaterial.findOne({ where: { materialwithoutdash: code } })
   // console.log(kiamaterial.description);
-  res.json({description: kiamaterial.description})
+  res.json({ description: kiamaterial.description })
 }
 
 const check_and_update_kia_master = async function (req, res) {
