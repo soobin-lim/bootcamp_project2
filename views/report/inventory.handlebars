@@ -8,9 +8,31 @@
 				{{material}} {{description}} {{pgn}}</div>
 			<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div> --}}
 
-			<div class="collapsible-header"><i class="material-icons">check_box_outline_blank
-				</i>
-				{{groupname}}</div>
+			<div class="collapsible-header">
+
+				<div class="left">
+					<i class="material-icons">check_box_outline_blank</i>
+					{{groupname}}
+				</div>
+
+				<div class="right">
+					<form action="#">
+						<label>
+							<input type="checkbox" />
+							<span>7 AM</span>
+						</label>
+						<label>
+							<input type="checkbox" />
+							<span>11 AM</span>
+						</label>
+						<label>
+							<input type="checkbox" />
+							<span>3 PM</span>
+						</label>
+					</form>
+				</div>
+			</div>
+
 			<div class="collapsible-body">
 				{{#each (getkiamaterialofgroup ../groupsAndKiaMaterials groupname) as |kiamaterial|}}
 
@@ -26,13 +48,15 @@
 					<!-- Switch -->
 					<div class="switch col s2">
 						<label>
-							Off
+							{{!-- Off --}}
 							<input type="checkbox" checked="checked">
 							<span class="lever"></span>
-							On
+							{{!-- On --}}
 						</label>
 					</div>
+					<div class="col s4">
 
+					</div>
 				</span>
 				{{/each}}
 
