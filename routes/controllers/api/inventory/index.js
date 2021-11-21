@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const router = require('express').Router(); //   /kiamaterial
 const db = require('../../../../models/');
 const master_api = require('../materialmaster/master_api')
+const moment = require('moment');
 
 async function getgroups() {
   // return just an array of descriptions
@@ -36,9 +37,12 @@ const render_inventory = async (req, res) => {
 
   res.render('report/inventory', {
     groups,
-    groupsAndKiaMaterials
+    groupsAndKiaMaterials,
+    today: moment().format('l')
   });
 }
+
+
 
 router.get('/', render_inventory);
 

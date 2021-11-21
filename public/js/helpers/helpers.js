@@ -1,12 +1,6 @@
 var register = function (Handlebars) {
   var helpers = {
-    // put all of your helpers inside this object
-    foo: function () {
-      return "FOO";
-    },
-    bar: function () {
-      return "BAR";
-    },
+    // put all helpers inside this object
     consolelogger: function (input) {
       // console.log(input)
       return "2"
