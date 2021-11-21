@@ -1,3 +1,8 @@
+# Heroku URL
+
+# Heroku Logg
+heroku logs --tail
+
 ## Setup for Local Machine
 1. Create database: travelSecure_development
 2. Execute npm install
