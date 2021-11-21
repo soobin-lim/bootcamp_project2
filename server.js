@@ -14,7 +14,7 @@ const passport = require("passport-local")
 
 const db = require("./models");
 
-db.sequelize.sync({ force: true })
+db.sequelize.sync({ force: false })
   .then(() => {
     console.log(`Database & tables created!`)
   }).catch(err => console.log('sequelize sync force error  :  ' + err))
