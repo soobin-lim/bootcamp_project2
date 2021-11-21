@@ -1,5 +1,27 @@
 <div class="container">
-	<h3>Inventory {{today}}</h3>
+	<div style="display:flex;align-items: center;justify-content: space-between;">
+		<h3 style="margin-top: 0px;margin-bottom: 10px">Inventory</h3>
+		<div style="display:inline-flex;align-items: center">
+			<a class="btn-floating"><i class="material-icons">chevron_left</i></a>
+			<h5 style="margin-top: 0px;margin-bottom: 0px">&nbsp &nbsp &nbsp{{today}}&nbsp &nbsp &nbsp</h5>
+			<a class="btn-floating"><i class="material-icons">chevron_right</i></a>
+		</div>
+
+		<form action="#" style="display:inline-flex;">
+			<p style="margin-right: 10px">
+				<label>
+					<input name="group1" type="radio" checked />
+					<span>1st</span>
+				</label>
+			</p>
+			<p>
+				<label>
+					<input name="group1" type="radio" />
+					<span>2nd</span>
+				</label>
+			</p>
+		</form>
+	</div>
 
 	<ul class="collapsible">
 		{{#each groups as |groupname|}}
@@ -33,45 +55,53 @@
 				</div>
 			</div>
 
-			<div class="collapsible-body">
+			<div class="collapsible-body" style="padding:5 px">
 				{{#each (getkiamaterialofgroup ../groupsAndKiaMaterials groupname) as |kiamaterial|}}
 
-				<span class="row">
+				<span class="row" style="display:inline-flex;justify-content:space-evenly;height: auto;align-items: center;">
 
-					<div class="chip col s1 center-align">
+					<div class="chip col s1 center-align" style="height: auto;align-items: center;padding:0;margin-left:0">
 						{{pac}}
 					</div>
-					<div class="col s5">
+					<div class="col s5" style="height: auto;align-items: center;padding:0">
 						{{material}}
 						{{description}}
 					</div>
 
-					<div class="col s2">
+					<div class="col s1" style="height: auto;align-items: center;padding:0">
 						<!-- Switch -->
 						<div class="switch" style="height: auto; width: auto;">
 							<label>
 								{{!-- Off --}}
-								<input type="checkbox" checked="checked">
+								<input type="checkbox" checked="checked" tabindex="-1">
 								<span class="lever"></span>
 								{{!-- On --}}
 							</label>
 						</div>
 					</div>
+					{{!-- <div class="col s2">
+					</div> --}}
+					<div class="col s1">
+						<a class="btn-floating pulse"><i class="material-icons">save</i></a>
+					</div>
 
-					<div class="col s1">
+					<div class="col s1" style="display:inline-flex;height: auto;align-items: center;padding:0">
+						{{!-- <label for="inventory1">7 AM</label> --}}
 						<input id="inventory1" type="number" class="validate detail truncate" style="height: auto">
-						<label for="inventory1">7 AM</label>
 					</div>
-					<div class="col s1">
+					
+					<div class="col s1" style="display:inline-flex;height: auto;align-items: center;padding:0">
+						{{!-- <label for="inventory2">11 AM</label> --}}
 						<input id="inventory2" type="number" class="validate detail truncate" style="height: auto">
-						<label for="inventory2">11 AM</label>
 					</div>
-					<div class="col s1">
+					<div class="col s1" style="display:inline-flex;height: auto;align-items: center;padding:0">
+						{{!-- <label for="inventory3">3 PM</label> --}}
 						<input id="inventory3" type="number" class="validate detail truncate" style="height: auto">
-						<label for="inventory3">3 PM</label>
 					</div>
 
 				</span>
+				{{!--
+				<hr style="width:100%;text-align:left;margin:0;padding:0"> --}}
 				{{/each}}
 
 			</div>
